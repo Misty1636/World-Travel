@@ -12,28 +12,33 @@ $Strong-pink: #cc3380;
 $Dark-cyan: #006680;
 $Strong-orange: #b36600;
 $Strong-blue: #1a80cc;
+$grayish-orange: #9f8d79;
+$light-gray: #f2f2f2;
 
 body,html{
     font-family: -apple-system, "Microsoft JhengHei", BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+.wrap{
+  overflow: hidden !important;
 }
 .opening-menu{
   position: absolute;
   left:0;
   top:0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background: rgba($black,.5);
   z-index: 95;
 }
 .header{
   width: 100%;
-  background: transparent;
+  background: $dark-gray;
   position: fixed;
   z-index: 10;
   transition: all .5s;
 }
 .header-dark{
-  background: rgba($dark-gray,.9);
+  background: rgba($dark-gray,.9) !important;
   transition: all 1s;
 }
 .nav{
@@ -536,19 +541,19 @@ body,html{
 
 .animated-left{
   opacity: 0;
-  transition: all 2s;
+  transition: all 1.5s;
   transform: translateX(-100%);
   @include media-breakpoint-down(sm){
-    transition: all 1.5s;
+    transition: all 1.2s;
   }
 }
 
 .animated-right{
   opacity: 0;
-  transition: all 2s;
+  transition: all 1.5s;
   transform: translateX(100%);
   @include media-breakpoint-down(sm){
-    transition: all 1.5s;
+    transition: all 1.2s;
   }
 }
 
@@ -570,3 +575,98 @@ body,html{
   }
 }
 
+// ---------------------------------------------------------------------- pro
+
+.Products-banner,.Guide{
+  padding-top: 46.6px;
+}
+
+
+.Products-title{
+  overflow: hidden;
+  h3{
+    color: $grayish-orange;
+    position: relative;
+    &:before{
+      border: 1px solid $grayish-orange;
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      width: 500px;
+    }
+    &:after{
+      border: 1px solid $grayish-orange;
+      content: "";
+      position: absolute;
+      top: 50%;
+      left:100%;
+      width: 500px;
+    }
+  }
+}
+
+.Products-continent{
+  ul{
+    width: 100%;
+  }
+  a{
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    padding: .5rem 0;
+    width: 150px;
+    text-align: center;
+    color: $dark-gray;
+    transition: all .3s;
+    // background: $light-gray;
+    &:hover{
+      color: $white;
+    }
+  }
+  .Asia{
+    border-bottom: 2px solid #f77500;
+    &:hover{
+      background: #f77500;
+    }
+  }
+  .Europe{
+    border-bottom: 2px solid #88be39;
+    &:hover{
+      background: #88be39;
+    }
+  }
+  .Oceania{
+    border-bottom: 2px solid #30A9DE;
+    &:hover{
+      background: #30A9DE;
+    }
+  }
+  .America{
+    border-bottom: 2px solid #E53A40;
+    &:hover{
+      background: #E53A40;
+    }
+  }
+  .Africa{
+    border-bottom: 2px solid #f9c734;
+    &:hover{
+      background: #f9c734;
+    }
+  }
+}
+
+
+
+$dark-gray: #2E2E2E; 
+$black: #000;
+$orange: #fe840e;
+$bright: #edb210;
+$moderate-blue: #333399;
+$Strong-pink: #cc3380;
+$Dark-cyan: #006680;
+$Strong-orange: #b36600;
+$Strong-blue: #1a80cc;
+$grayish-orange: #9f8d79;
+$light-gray: #f2f2f2;
+$abg: #4cbee9;

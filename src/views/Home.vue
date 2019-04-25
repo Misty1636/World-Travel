@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="home">
 
     <transition name="fade">
       <div class="loading-box">
@@ -14,21 +14,22 @@
         </div>
       </div>
     </transition> 
+    
 
     <header class="header container-fluid">
       <div class="d-flex justify-content-end nav">
         <div class="offcanvas-bg"></div>  
         <ul class="menu list-unstyled d-lg-flex mb-0"> 
           <li class="d-lg-none">
-            <a href="#" class="close-link">
+            <a href="#" class="close-link"  @click.prevent="closeOffcanvas">
               <font-awesome-icon icon="times" class="close-menu"/>
             </a>
           </li>
-          <li><a href="#">首頁</a></li>
-          <li class="menu-item"><a href="#">精彩介紹</a></li>
-          <li class="menu-item"><a href="#">行程一覽</a></li>
-          <li class="menu-item"><a href="#">訂單查詢</a></li>
-          <li class="menu-item"><a href="#">登入</a></li>
+          <li><router-link to="/index"> 首頁</router-link></li>
+          <li class="menu-item"><router-link to="/Guide"> 精彩介紹</router-link></li>
+          <li class="menu-item"><router-link to="/Products"> 行程一覽</router-link></li>
+          <li class="menu-item"><router-link to="/Login"> 訂單查詢</router-link></li>
+          <li class="menu-item"><router-link to="/Login"> 登入</router-link></li>
         </ul>
         <div class="cart">
           <button type="button" class="dropdown-toggle cart-check" data-toggle="dropdown">
@@ -68,14 +69,15 @@
             </button>
           </div>
         </div>
-        <button type="button" class="mobile-link ml-2">
+        <button type="button" class="mobile-link ml-2" @click.prevent="openOffcanvas">
           <font-awesome-icon icon="bars" />
         </button>
       </div>
     </header>
     
+    
     <div class="banner-bg">
-      <div id="bgndVideo" class="player" data-property="{videoURL:'99re33iIt7s',containment:'.banner-bg',autoPlay:true, mute:true, startAt:0, optimizeDisplay:true,opacity:1,showControls:false}">	
+      <div id="bgndVideo" ref="bgndVideo" class="player" data-property="{videoURL:'99re33iIt7s',containment:'.banner-bg',autoPlay:true, mute:true, startAt:0, optimizeDisplay:true,opacity:1,showControls:false}">	
       </div>
 
       <div class="banner-mask d-flex justify-content-center align-items-center">
@@ -88,7 +90,7 @@
           </div>
         </div>
 
-        <a href="#newzealand" class="explore-icon text-center text-white">
+        <a href="#newzealand" class="explore-icon text-center text-white" @click.prevent="toTarget('#newzealand')"> 
           <font-awesome-icon icon="angle-double-down" class="angle-down" />
         </a>  
       </div>
@@ -119,7 +121,7 @@
           </div>
         </div>
       </div>
-      <a href="#Maldives" class="explore-icon text-center text-white d-none d-md-block">
+      <a href="#Maldives" class="explore-icon text-center text-white d-none d-md-block" @click.prevent="toTarget('#Maldives')">
         <font-awesome-icon icon="angle-double-down" class="angle-down" />
       </a>
     </section>
@@ -146,7 +148,7 @@
           </div>
         </div>
       </div>
-      <a href="#Egypt" class="explore-icon text-center text-white d-none d-md-block">
+      <a href="#Egypt" class="explore-icon text-center text-white d-none d-md-block" @click.prevent="toTarget('#Egypt')">
         <font-awesome-icon icon="angle-double-down" class="angle-down" />
       </a>
     </section>
@@ -173,7 +175,7 @@
           </div>
         </div>
       </div>
-      <a href="#Peru" class="explore-icon text-center text-white d-none d-md-block">
+      <a href="#Peru" class="explore-icon text-center text-white d-none d-md-block" @click.prevent="toTarget('#Peru')">
         <font-awesome-icon icon="angle-double-down" class="angle-down" />
       </a>
     </section>
@@ -200,7 +202,7 @@
           </div>
         </div>
       </div>
-      <a href="#Iceland" class="explore-icon text-center text-white d-none d-md-block">
+      <a href="#Iceland" class="explore-icon text-center text-white d-none d-md-block" @click.prevent="toTarget('#Iceland')">
         <font-awesome-icon icon="angle-double-down" class="angle-down" />
       </a>
     </section>
@@ -229,7 +231,7 @@
       </div>
     </section>
 
-    <footer class="footer-bg py-5">
+    <!-- <footer class="footer-bg py-5">
       <div class="container">
         <div class="d-flex justify-content-sm-between align-items-center flex-sm-row flex-column text-white">
           <small class="mb-sm-0 mb-3">
@@ -249,13 +251,13 @@
           </div>
         </div>
       </div>
-    </footer>
-
+    </footer> -->
+    
+      <!-- <button @click="goTop" ref="btn" title="回到顶部"></button> -->
   </div>
 </template>
 
 <script>
-import "jquery";
 
 export default {
   name: "Home",
@@ -264,21 +266,136 @@ export default {
       player: null,
     }
   },
-  mounted () {
-    this.player = $("#bgndVideo").YTPlayer()
+  methods:{
+    closeOffcanvas(){
+      $(".menu").removeClass("open-offcanvas");
+      $(".header").addClass("header-dark");
+      $(".offcanvas-bg").removeClass("opening-menu");
+    },
+    openOffcanvas(){
+      $(".menu").addClass("open-offcanvas");
+      $(".header").removeClass("header-dark");
+      $(".offcanvas-bg").addClass("opening-menu");
+    },
+    toTarget(target){
+      
+      let toElement = document.querySelector(target);
+      let total = toElement.offsetTop;
 
-    setTimeout(() => {
-      this.player.YTPlayer()
-    }, 1200)
+      let distance = document.documentElement.scrollTop || document.body.scrollTop;
+      // let step = total/1;
+
+      // switch(target){
+      //   case '#Maldives':
+      //     step = total/2;
+      //     break;
+      //   case '#Egypt':
+      //     step = total/3;
+      //     break;
+      //   case '#Peru':
+      //     step = total/4;
+      //     break;
+      //   case '#Iceland':
+      //     step = total/5;
+      //     break;
+      // }
+      (function smoothDown () {
+          // if (distance < total) {
+          //     distance += step
+          //     document.body.scrollTop = distance
+          //     document.documentElement.scrollTop = distance
+          //     setTimeout(smoothDown, 10)
+          // } else {
+          //     document.body.scrollTop = total
+          //     document.documentElement.scrollTop = total
+          // }
+          let speed = 2
+          let num = 0
+          let time_total = setInterval(()=>{
+            speed += speed/20
+            if(speed>22){
+              speed = 23
+            }
+            distance += speed;
+            console.log(speed)
+            document.body.scollTop = distance;
+            document.documentElement.scrollTop = distance;
+            if(total - distance < speed){
+              distance += total - distance;
+              document.body.scollTop = distance;
+              document.documentElement.scrollTop = distance;
+              clearInterval(time_total);
+            }
+          } , 10);
+      })()
+    }
+    // needScroll () {
+    //   let clientHeight = document.documentElement.clientHeight
+    //   let obtn = this.$refs.btn
+    //   window.onscroll = function () {
+    //     let osTop = document.documentElement.scrollTop || document.body.scrollTop
+    //     if (osTop >= clientHeight) {
+    //       obtn.className += 'header-dark'
+    //     } else {
+    //       obtn.style.display = 'none'
+    //     }
+    //     if (!this.isTop) {
+    //       clearInterval(this.timer)
+    //     }
+    //     this.isTop = false
+    //   }
+    // },
+    // goTop () {
+    //   let self = this
+    //   self.timer = setInterval(function () {
+    //     let osTop = document.documentElement.scrollTop || document.body.scrollTop
+    //     let ispeed = Math.floor(-osTop / 5)
+    //     document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed
+    //     self.isTop = true
+    //     if (osTop === 0) {
+    //       clearInterval(self.timer)
+    //     }
+    //   }, 30)
+    // }
+    
+  },
+  mounted () {
+
+    this.$nextTick(function () {
+      this.player = $("#bgndVideo").YTPlayer()
+
+      setTimeout(() => {
+        this.player .YTPlayer()
+      }, 1000)
+    })
+    
+ 
+    // $('#bgndVideo').on('YTPReady', function() {
+    //   // 成功執行後觸發
+    //   console.log('aaaa')
+    //   $('#bgndVideo').YTPlayer()
+    // })
 
     
     setTimeout(() => {
       $(".loading-box").addClass('index0')
-    }, 3200)
-    
-  },
+    }, 3000)
+
+    this.distance_Maldives = document.querySelector('#Maldives').offsetTop
+    this.distance_Egypt = document.querySelector('#Egypt').offsetTop
+    this.distance_newzealand = document.querySelector('#newzealand').offsetTop
+    this.distance_Peru = document.querySelector('#Peru').offsetTop
+    this.distance_Iceland = document.querySelector('#Iceland').offsetTop
+    this.$nextTick(function () {
+      // document.querySelector('.header').addEventListener('scroll', this.onScroll)
+    })
+
+  }
 };
 </script>
 
-<style lang="scss"> 
+<style lang="scss" scoped> 
+  .header{
+    background: transparent;
+  }
 </style>

@@ -31,34 +31,35 @@ $(window).scroll(function() {
 });
 
 $(function() {
-  $(".mobile-link").click(function(e) {
-    // open offcanvas
-    e.preventDefault();
-    $(".menu").addClass("open-offcanvas");
-    $(".header").removeClass("header-dark");
-    $(".offcanvas-bg").addClass("opening-menu");
-  });
+  // $(".mobile-link").on("click", function(e) {
+  //   // open offcanvas
+  //   e.preventDefault();
+  //   $(".menu").addClass("open-offcanvas");
+  //   $(".header").removeClass("header-dark");
+  //   $(".offcanvas-bg").addClass("opening-menu");
+  // });
 
-  $(".close-link").click(function(e) {
-    // close offcanvas
-    e.preventDefault();
-    $(".menu").removeClass("open-offcanvas");
-    $(".header").addClass("header-dark");
-    $(".offcanvas-bg").removeClass("opening-menu");
-  });
+  // $(".close-link").on("click", function(e) {
+  //   // close offcanvas
+  //   e.preventDefault();
+  //   $(".menu").removeClass("open-offcanvas");
+  //   $(".header").addClass("header-dark");
+  //   $(".offcanvas-bg").removeClass("opening-menu");
+  // });
 
   $(".footer-bg a").click(function(e) {
     e.preventDefault();
   });
 
-  $(".explore-icon").click(function(e) {
-    // 向下探索滾動
-    e.preventDefault();
-    $("body, html").animate(
-      {
-        scrollTop: $($.attr(this, "href")).offset().top
-      },
-      1000
-    );
-  });
+  // $(".explore-icon").on("click", function(e) {
+  //   // 向下探索滾動
+  //   e.preventDefault();
+  //   $("body, html").animate(
+  //     {
+  //       scrollTop: $($.attr(this, "href")).offset().top
+  //     },
+  //     1000
+  //   );
+  // });
 });
+

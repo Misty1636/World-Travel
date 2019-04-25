@@ -19,11 +19,12 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // jquery
-import $ from "jquery";
-// import "jquery";
+import "jquery";
+import "./jquery-vendor";
 import "jquery.mb.ytplayer";
-// import VideoBg from "vue-videobg";
-// Vue.component("video-bg", VideoBg);
+// import "velocity-animate/velocity.ui.min.js";
+import VideoBg from "vue-videobg";
+Vue.component("video-bg", VideoBg);
 import "../src/customJS";
 
 // 驗證套件
@@ -55,7 +56,7 @@ Vue.filter("currency", currencyFilter);
 Vue.filter("getTime", timetampsFilter);
 
 axios.defaults.withCredentials = true;
-window.$ = $;
+// window.$ = $;
 
 new Vue({
   render: h => h(App),
