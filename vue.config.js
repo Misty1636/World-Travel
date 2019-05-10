@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/WorldTravel/',
+  publicPath: '/World-Travel/',
   outputDir: 'dist'
 };
 
