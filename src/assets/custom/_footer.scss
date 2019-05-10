@@ -1,0 +1,24 @@
+.footer-bg {
+  background: $dark-gray;
+  @include media-breakpoint-down(sm) {
+    margin-top: 20px;
+  }
+  a {
+    display: block;
+    color: $white;
+    transition: all 0.5s;
+    border-radius: 7px;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    &:hover {
+      transform: rotate(360deg);
+    }
+    img {
+      width: 34px;
+      height: 34px;
+      transform: translate(-1px, -1px);
+      background: $white;
+    }
+  }
+}

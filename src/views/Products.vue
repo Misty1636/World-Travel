@@ -1,152 +1,171 @@
 <template>
   <div>
-    <Nav />
     <div class="Products-banner">
-      <div class="swiper">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide, index) in swiperSlides" :key="index" :style="`background-image: url(${slide.imgPath}); background-position: center center;
-          background-size: cover;`">
-            <div class="container d-flex align-items-center h-100 swiper-box">
-              <div class="p-md-5 p-4 swipertext d-flex flex-column align-items-center">
-                <h2 class="mb-1 pb-1">{{slide.country}}</h2>
-                <span>
-                  {{slide.en}}
-                </span>
-              </div>  
-            </div>
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-      </div>
+      <loading :active.sync="isLoading">
+        <template slot="default">
+          <img src="../assets/002.gif">
+        </template>
+      </loading>
 
-      <section class="Products-main pt-5 container">
+      <slide />
+
+      <section class="Products-main pt-6 container" id="MainProducts">
         <div class="d-flex justify-content-center Products-title">
-          <h3 class="mb-4 px-5">精選行程</h3>
+          <h1 class="mb-4 px-5">
+             <font-awesome-icon icon="plane"  />
+            精選行程
+          </h1>
         </div>
-        <div class="Products-continent">
-          <ul class="list-unstyled d-flex justify-content-center">
-            <li><a href="#" class="Asia">亞洲</a></li>
-            <li><a href="#" class="Europe">歐洲</a></li>
-            <li><a href="#" class="Oceania">大洋洲</a></li>
-            <li><a href="#" class="America">美洲</a></li>
-            <li><a href="#" class="Africa">非洲</a></li>
+        <div class="Products-continent mb-6">
+          <ul class="list-unstyled d-flex justify-content-center mb-0">
+            <li><a href="#" class="Asia" :class="{active: continent == '亞洲'}" @click.prevent="currentContinent('亞洲')">亞洲</a></li>
+            <li><a href="#" class="Europe" :class="{active: continent == '歐洲'}" @click.prevent="currentContinent('歐洲')">歐洲</a></li>
+            <li><a href="#" class="Oceania" :class="{active: continent == '大洋洲'}" @click.prevent="currentContinent('大洋洲')">大洋洲</a></li>
+            <li><a href="#" class="America" :class="{active: continent == '美洲'}" @click.prevent="currentContinent('美洲')">美洲</a></li>
+            <li><a href="#" class="Africa" :class="{active: continent == '非洲'}" @click.prevent="currentContinent('非洲')">非洲</a></li>
           </ul>
         </div>
+        <div class="Products-list row">
+          
+          <div class="col-md-6 col-12 mb-6" v-for='item in products' :key="item.id">
+            <div class="list-box">
+              <div class="list-img">
+                <img class="img-fluid" :src="item.imageUrl" alt="">
+                <div class="list-more p-3 d-flex justify-content-center align-items-center">
+                  <a :href="`#/ProductsDetails/${item.id}`" @click.prevent="ToProductsDetaill(item.id)">More</a>
+                  <button type="button" class="list-btn" @click="getCurrentProduct(item.id)">我要報名</button>
+                </div>
+              </div>
+              <div class="list-content p-3">
+                <h4 class="mb-3">{{item.title}}</h4>
+                <p class="text-secondary">{{item.description}}</p>
+                <div class="list-price d-flex justify-content-between align-items-center">
+                  <span class="oldprice text-secondary">{{item.origin_price | currency}}</span>
+                  <span class="newprice">{{item.price | currency}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
+      
+      <Pagination :pages="pagination" @thePage="getProducts" @scrollTarget="scroll" class="d-flex justify-content-center mb-6"/>
 
     </div>
+
+    <ProductModal :theProduct="temproduct" :loadingtoCart="loadingtoCart"  @addtheCart="addtoCart" />
+
   </div>
 </template>
 
 <script>
 import Nav from "../components/Nav";
-import 'swiper/dist/css/swiper.css';
-import { swiper, swiperSlide } from 'vue-awesome-swiper';
+import slide from "../components/slide";
+import Pagination from '../components/pagination';
+import ProductModal from '../components/productModal';
 
 export default {
-  name: "products",
+  name: "Products",
   data(){
     return {
-      swiperOption: {
-        loop: true,
-        centeredSlides: true,
-        effect : 'fade',
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        }
+      continent: '',
+      products: [],
+      temproduct: {},
+      pagination:{
+        total_pages: 1,
+        current_page: 1,
+        has_pre: false,
+        has_next: false,
+        page_size: 8 
       },
-      swiperSlides: [
-        {
-          imgPath: 'pro/Fiji-lg.jpg',
-          country: '斐濟',
-          en: 'Fiji'
-        }, 
-        {
-          imgPath: 'pro/Japan-lg2.jpg',
-          country: '日本',
-          en: 'Japan'
-        }, 
-        {
-          imgPath: 'pro/Paris-lg.jpg',
-          country: '法國',
-          en: 'France'
-        }, 
-        {
-          imgPath: 'pro/Switzerland-lh.jpg',
-          country: '瑞士',
-          en: 'Swiss'
-        }, 
-        {
-          imgPath: 'pro/China-lg.jpg',
-          country: '中國',
-          en: 'China'
-        }
-      ]
+      isLoading: false,
+      loadingtoCart:''
     }
   },
   components:{
     Nav,
-    swiper,
-    swiperSlide
+    slide,
+    Pagination,
+    ProductModal
   },
-  mounted(){
-    // $('.swiper-container').on('mouseover', function(e) {
-    //   this.swiper.autoplay.stop()
-    // })
-    // $('.swiper-container').on('mouseout', function(e) {
-    //   this.swiper.autoplay.start()
-    // })
+  methods:{
+    currentContinent(item){ //當前區域給予樣式及過濾資料
+      this.continent = item;
+      this.getProducts();
+      let top = $('#MainProducts').offset().top;
+      $('html,body').animate({scrollTop:(top-47.5)},1000);
+      
+    },
+    scroll(){ // 分頁點擊滾動
+      setTimeout(()=> {
+        let top = $('#MainProducts').offset().top;
+        $('html,body').animate({scrollTop:(top-47.5)},1000);
+      },1000);
+    },
+    getProducts(page=1) {
+      const vm = this;
+      const api2 = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/products/all`;
+      vm.isLoading = true;
+      this.$http.get(api2).then((response)=> {
+        vm.isLoading = false;
+        vm.products = response.data.products;
+
+        if(vm.continent !== '') { // 判別地區
+          vm.products = vm.products.filter((item)=> {
+            return item.category == vm.continent;
+          })
+        }
+ 
+        const len = vm.products.length;
+        const size = vm.pagination.page_size;
+        vm.pagination.total_pages = Math.ceil(len/size);  //限制最多8個一頁
+        vm.pagination.current_page = page;
+        if(page>1) {
+          vm.pagination.has_pre = true;
+        } else {
+          vm.pagination.has_pre = false;
+        }
+        if(page <vm.pagination.total_pages) {
+          vm.pagination.has_next = true;
+        } else {
+          vm.pagination.has_next = false;
+        }
+
+        vm.products = vm.products.slice((0+size*(page-1)),size*page);  //取出第幾頁資料
+
+      })
+
+    },
+    getCurrentProduct(id) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/product/${id}`;
+      const vm = this;
+      this.$http.get(api).then(response => {    
+        $('#productModal').modal('show');
+        vm.temproduct = response.data.product;
+      })
+    },
+    ToProductsDetaill(id) {
+      this.$router.push(`/ProductsDetails/${id}`);
+    },
+    addtoCart(id,qty=1) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
+      const vm = this;
+      vm.loadingtoCart = id;
+      const cart = {
+        product_id: id,
+        qty
+      };
+      this.$http.post(api,{data:cart}).then(response => {
+        $('#productModal').modal('hide');
+        vm.loadingtoCart = '';
+        vm.$bus.$emit('message:push','此行程已加入購物車','success');
+        vm.$bus.$emit('pushCart');
+      });
+    },
+  },
+  mounted() {
+    this.getProducts();
+    $('html,body').animate({scrollTop:0},10);
   }
 };
 </script>
-
-<style lang="scss" scpoed>
-  .swiper-container {
-    height: 350px;
-    @media (min-width: 576px){
-      height: 450px;
-      @media (min-width: 768px){
-        height: 600px;
-      }
-    }
-  }
-
-  .swiper-box{
-    transform: translateX(40px);
-    @media (min-width: 576px){
-      transform: translateX(30px);
-      @media (min-width: 768px){
-        transform: translateX(20px);
-        @media (min-width: 992x){
-          transform: translateX(0);
-        }
-      }
-    }
-  }
-
-  .swipertext{
-    border-radius: 50%;
-    background:rgba(#000,.6);
-    color:#fff;
-    h2{
-      font-size: 40px;
-      font-weight: 300;
-      border-bottom: 1px solid #fff;
-      @media (min-width: 768px){
-        font-size: 60px;
-      }
-    }
-    span{
-      font-style: italic;
-      font-size: 18px;
-      @media (min-width: 768px){
-        font-size: 25px;
-      }
-    }
-  }
-</style>

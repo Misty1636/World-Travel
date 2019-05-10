@@ -1,0 +1,55 @@
+body,html{
+  font-family: -apple-system, "Microsoft JhengHei", BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+.wrap{
+overflow: hidden !important;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.ellipsis {
+  max-width: 130px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  @include media-breakpoint-down(xs) {
+    max-width: 170px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.ToCustomerCart {
+  background: $Bright-red;
+  color: $white;
+  &:hover {
+    color: $white;
+    background: $Strong-red;
+  }
+}
+
+.mincart-total {
+  @include media-breakpoint-down(xs) {
+    display: none;
+  }
+}
+.mincart-icon {
+  color: $Strong-blue;
+}
+
+.alert-light {
+  background: #f7f7f7;
+  border-color: $lighter-gray;
+  color: #919191;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

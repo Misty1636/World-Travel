@@ -1,0 +1,59 @@
+.login-bg {
+  background: url(../src/assets/login.jpg) no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  color: $light-dark;
+  .login-mark {
+    background: rgba($black, 0.1);
+    height: 100%;
+  }
+}
+
+.login-box {
+  width: 400px;
+  border-radius: 5px;
+  background: rgba($white, 0.9);
+  @include media-breakpoint-down(xs) {
+    width: 300px;
+  }
+  .title {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    text-indent: 12px;
+    border-left: 5px solid $grayish-orange;
+  }
+}
+
+.login-other {
+  overflow: hidden;
+  small {
+    display: inline-block;
+    padding: 0 0.7rem;
+    color: $light-dark;
+    position: relative;
+    &:before {
+      border: 0.5px solid $light-dark;
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      width: 150px;
+    }
+    &:after {
+      border: 0.5px solid $light-dark;
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 150px;
+    }
+  }
+}
+
+.login-icon {
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+  }
+}

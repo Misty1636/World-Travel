@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav aria-label="Page navigation example">
-      <ul class="pagination">
+      <ul class="pagination mb-0">
         <li class="page-item" :class="{disabled: !pages.has_pre}">
           <a class="page-link" href="#" aria-label="Previous"  @click.prevent="getPages(pages.current_page-1)">
             <span aria-hidden="true">&laquo;</span>
@@ -31,6 +31,7 @@ export default {
   methods: {
     getPages(page) {
       this.$emit("thePage", page);
+      this.$emit("scrollTarget");
     },
   },
 };

@@ -5,6 +5,7 @@ import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
+// bootstrap
 import "bootstrap";
 
 // Loading套件
@@ -21,14 +22,12 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 // jquery
 import "jquery";
 import "./jquery-vendor";
-import "jquery.mb.ytplayer";
-// import "velocity-animate/velocity.ui.min.js";
+
+// 背景套件
 import VideoBg from "vue-videobg";
 Vue.component("video-bg", VideoBg);
-import "../src/customJS";
 
 // 驗證套件
-
 import VeeValidate from "vee-validate";
 import zh_TW from "vee-validate/dist/locale/zh_TW";
 
@@ -68,7 +67,6 @@ router.beforeEach((to, from, next) => {
     const api = `${process.env.VUE_APP_API}/api/user/check`;
 
     axios.post(api).then(response => {
-      // console.log(response.data)
       if (response.data.success) {
         next();
       } else {

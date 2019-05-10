@@ -1,0 +1,46 @@
+.CreateOrder-title {
+  color: $dark-gray;
+  font-size: 2rem;
+}
+
+.order-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: none;
+  padding: 0.5rem 0;
+  border-radius: 3px;
+  transition: all 0.3s;
+  outline: 0;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.order-submit {
+  background: $Bright-red;
+  color: $white;
+  &:hover {
+    color: $white;
+    background: $Strong-red;
+  }
+}
+
+.order-back {
+  border: 1px solid $Bright-red;
+  background: transparent;
+  color: $Bright-red;
+  &:hover {
+    color: $white;
+    background: $Bright-red;
+  }
+}
+
+.plane {
+  color: $Bright-orange;
+  border: 1px solid $Bright-orange;
+  border-radius: 50%;
+  padding: 0 5px;
+  line-height: 28px;
+  font-size: 16px;
+}
