@@ -1,2 +1,2 @@
 
-Demo  https://misty1636.github.io/World-Travel/#/index
+Demo  https://misty1636.github.io/World-Travel/
