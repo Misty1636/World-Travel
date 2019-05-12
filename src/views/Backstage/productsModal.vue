@@ -99,14 +99,14 @@
 export default {
   props: {
     theProducts: {
-        type: Object,
-        default: {}
+      type: Object,
+      default: () => {},
     },
     uploadStatus: {
-        type: Object,
-        default: {}
+      type: Object,
+      default: () => {},
     },
-    isNews:{}
+    isNews: {},
   },
   methods: {
     checkSend() {
@@ -114,7 +114,7 @@ export default {
     },
     updateFile() {
       this.$emit('uploadImg');
-    }
-  }
-}
+    },
+  },
+};
 </script>

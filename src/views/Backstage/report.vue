@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid pt-7 d-flex flex-column align-items-center">
-    <h1 class="text-primary mb-6">報表</h1> 
+    <h1 class="text-primary mb-6">報表</h1>
     <div class="report-content p-3 text-primary">
       <div class="report-item mb-3 h6">
         <span class="report-name">預估總營收</span>
@@ -41,73 +41,69 @@
   </div>
 </template>
 
-
 <script>
-import Pagination  from '../../components/pagination';
-
 export default {
   data() {
-    return{
+    return {
       order: {},
       pagination: {},
       isLoading: false,
-      allOrder: []
-    }
-  },
-  components: {
-    Pagination
+      allOrder: [],
+    };
   },
   methods: {
-    getProducts(page=1) {
+    getProducts(page = 1) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/orders?page=${page}`;
       const vm = this;
 
-      this.$http.get(api).then((response)=> {
-        let len = response.data.orders.length
-        for( let i=0;i<len ;i++) {
+      this.$http.get(api).then((response) => {
+        const len = response.data.orders.length;
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < len; i++) {
           vm.allOrder.push(response.data.orders[i]);
         }
-      })
+      });
     },
     getAllOrder() {
       const vm = this;
-         const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/orders?page=${1}`;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/orders?page=${1}`;
 
-      this.$http.get(api).then((response)=> {
-        let pages = response.data.pagination.total_pages;
+      this.$http.get(api).then((response) => {
+        const pages = response.data.pagination.total_pages;
 
-        for(let i=1;i<pages+1;i++){
+        // eslint-disable-next-line no-plusplus
+        for (let i = 1; i < pages + 1; i++) {
           vm.getProducts(i);
         }
-      })
-    }
+      });
+    },
   },
-  computed:{
-    total(){
-      let str = 0
-      this.allOrder.forEach((item)=>{
-        if(item.is_paid){
-          str += item.total
+  computed: {
+    total() {
+      let str = 0;
+      this.allOrder.forEach((item) => {
+        if (item.is_paid) {
+          str += item.total;
         }
-      })
+      });
       return str;
     },
-    waittotal(){
-      let str = 0
-      this.allOrder.forEach((item)=>{
-        if(!item.is_paid){
-          str += item.total
+    waittotal() {
+      let str = 0;
+      this.allOrder.forEach((item) => {
+        if (!item.is_paid) {
+          str += item.total;
         }
-      })
+      });
       return str;
     },
-    pay(){
-      let str = 0
-      this.allOrder.forEach((item)=>{
-        if(item.is_paid){
-          str += 1
+    pay() {
+      let str = 0;
+      this.allOrder.forEach((item) => {
+        if (item.is_paid) {
+          str += 1;
         }
-      })
+      });
       return str;
     },
     // pro(){
@@ -132,10 +128,10 @@ export default {
     //   return xyz;
     // }
   },
-  mounted(){
+  mounted() {
     this.getAllOrder();
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>

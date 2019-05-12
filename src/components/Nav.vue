@@ -3,24 +3,24 @@
     <header class="header container-fluid">
       <div class="px-lg-5 px-3">
         <div class="d-flex justify-content-end nav">
-          <div class="offcanvas-bg"></div>  
+          <div class="offcanvas-bg"></div>
           <div class="mr-auto align-self-center">
             <router-link to="/index" class="d-block">
               <img src="../assets/worldtravel-logo2.png" style="height:35px;">
               <img src="../assets/worldtravel-logo.png" style="height:40px;transform: translateX(-8px);" alt="World Travel">
             </router-link>
           </div>
-          <ul class="menu list-unstyled d-lg-flex mb-0"> 
+          <ul class="menu list-unstyled d-lg-flex mb-0">
             <li class="d-lg-none">
               <a href="#" class="close-link" @click.prevent="closeOffcanvas">
                 <font-awesome-icon icon="times" class="close-menu"/>
               </a>
             </li>
-            <li><router-link to="/index"> 首頁</router-link></li>
-            <li class="menu-item"><a href="#/Guide" @click.prevent="toGuide"> 精彩介紹</a></li>
-            <li class="menu-item"><a href="#/Products" @click.prevent="toProducts"> 行程一覽</a></li>
+            <li><a href="#/index"  @click.prevent="toView('index')"> 首頁</a></li>
+            <li class="menu-item"><a href="#/Guide" @click.prevent="toView('Guide')"> 精彩介紹</a></li>
+            <li class="menu-item"><a href="#/Products" @click.prevent="toView('Products')"> 行程一覽</a></li>
             <!-- <li class="menu-item"><a href="#/Login" @click.prevent="toLogin"> 訂單查詢</a></li> -->
-            <li class="menu-item"><a href="#/Login" @click.prevent="toLogin"> 登入</a></li>
+            <li class="menu-item"><a href="#/Login" @click.prevent="toView('Login')"> 登入</a></li>
           </ul>
           <div class="cart">
             <button type="button" class="dropdown-toggle cart-check" data-toggle="dropdown">
@@ -42,7 +42,7 @@
                   </tr>
                 </tbody>
               </table>
-              <button type="button" class="btn btn-block ToCustomerCart" @click="ToCustomerCart">
+              <button type="button" class="ToCustomerCart" @click="ToCustomerCart">
                 前往購物車
               </button>
             </div>
@@ -53,32 +53,30 @@
         </div>
       </div>
     </header>
-
     <Alert />
   </div>
 </template>
 
-
 <script>
-
+/* global $ */
 import Alert from '../components/AlertMessage';
 
 export default {
-  name: "Nav",
-   data() {
+  name: 'Nav',
+  data() {
     return {
       cart: {},
-      cartlength: 0
+      cartlength: 0,
     };
   },
   methods: {
     closeOffcanvas() {
-      $(".menu").removeClass("open-offcanvas");
-      $(".offcanvas-bg").removeClass("opening-menu");
+      $('.menu').removeClass('open-offcanvas');
+      $('.offcanvas-bg').removeClass('opening-menu');
     },
     openOffcanvas() {
-      $(".menu").addClass("open-offcanvas");
-      $(".offcanvas-bg").addClass("opening-menu");
+      $('.menu').addClass('open-offcanvas');
+      $('.offcanvas-bg').addClass('opening-menu');
     },
     ToCustomerCart() {
       this.$router.push('/customerCart');
@@ -86,38 +84,74 @@ export default {
     getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
       const vm = this;
-      this.$http.get(api).then(response => {
+      this.$http.get(api).then((response) => {
         vm.cart = response.data.data;
-        vm.cartlength = vm.cart.carts.length ;
-      })
+        vm.cartlength = vm.cart.carts.length;
+      });
     },
-    toGuide() {
-      this.$router.push('/Guide');
+    toView(name) {
+      this.$router.push(`/${name}`);
       this.closeOffcanvas();
     },
-    toProducts() {
-      this.$router.push('/Products');
-      this.closeOffcanvas();
+    getrouter() {
+      const { path } = this.$route;
+      const search = 'index';
+      if (path.indexOf(search) !== -1) {
+        $('.header').addClass('header-transparent');
+        $('.header').removeClass('header-dark');
+      } else {
+        $('.header').removeClass('header-transparent');
+        $('.header').removeClass('header-dark');
+      }
     },
-    toLogin() {
-      this.$router.push('/Login');
-    }
   },
   components: {
-      Alert
+    Alert,
   },
   mounted() {
-    this.getCart();
+    const vm = this;
+    vm.getCart();
+    vm.getrouter();
 
-    this.$bus.$on(("pushCart"), UpdateCart => {
+    $(window).scroll(() => {
+      const { path } = vm.$route;
+      const search = 'index';
+      const scrollPos = $(window).scrollTop();
+      const windowHeight = $(window).height();
+
+      if (path.indexOf(search) === -1) {
+        return;
+      }
+
+      // eslint-disable-next-line func-names
+      $('.header').each(function () {
+        const thisPos = $(this).offset().top;
+        if (windowHeight + scrollPos >= thisPos) {
+          $(this).addClass('header-dark');
+        }
+        if (scrollPos === 0) {
+          $(this).removeClass('header-dark');
+        }
+      });
+    });
+
+    this.$bus.$on(('pushCart'), () => {
       this.getCart();
     });
-  }
+  },
+  watch: {
+    // eslint-disable-next-line object-shorthand
+    '$route'() {
+      this.getrouter();
+      // console.log(this.$route.path);
+    },
+  },
 };
 </script>
 
-
-
-
-
+<style lang="scss" scoped>
+  .header-transparent{
+    background-image: none;
+  }
+</style>
 

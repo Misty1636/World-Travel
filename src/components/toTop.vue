@@ -5,30 +5,30 @@
       <span>Top</span>
     </a>
   </div>
-</template> 
-
+</template>
 
 <script>
+/* global $ */
 export default {
-  name: "toTop",
-   data() {
+  name: 'toTop',
+  data() {
     return {};
   },
   methods: {
     scrollToTop() {
-      $('html,body').animate({scrollTop:0},1000);
+      $('html,body').animate({ scrollTop: 0 }, 1000);
     },
   },
   mounted() {
-    $(window).scroll(()=> {
-        let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
-        if( scrollPos>500) {
-          $(".animated-opacity").addClass("opacity-In");
-        } else {
-          $(".animated-opacity").removeClass("opacity-In");
-        }
+    $(window).scroll(() => {
+      const scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollPos > 500) {
+        $('.animated-opacity').addClass('opacity-In');
+      } else {
+        $('.animated-opacity').removeClass('opacity-In');
+      }
     });
-  }
+  },
 };
 </script>
 

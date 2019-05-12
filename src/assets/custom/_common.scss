@@ -25,9 +25,19 @@ overflow: hidden !important;
 .ToCustomerCart {
   background: $Bright-red;
   color: $white;
+  padding: .5rem 0;
+  width: 100%;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+  outline: 0;
+  transition: all .3s;
   &:hover {
     color: $white;
     background: $Strong-red;
+  }
+  &:focus{
+    outline: 0;
   }
 }
 

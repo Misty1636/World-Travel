@@ -16,22 +16,22 @@
           </a>
         </li>
       </ul>
-    </nav> 
+    </nav>
   </div>
-</template> 
+</template>
 
 <script>
 export default {
   props: {
     pages: {
       type: Object,
-      default: {},
+      default: () => {},
     },
   },
   methods: {
     getPages(page) {
-      this.$emit("thePage", page);
-      this.$emit("scrollTarget");
+      this.$emit('thePage', page);
+      this.$emit('scrollTarget');
     },
   },
 };

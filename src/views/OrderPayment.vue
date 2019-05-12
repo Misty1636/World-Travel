@@ -125,72 +125,72 @@
 </template>
 
 <script>
+/* global $ */
 export default {
-  name: "OrderPayment",
-  data(){
-    return{
-      order:{
-        user:{
-          
-        }
+  name: 'OrderPayment',
+  data() {
+    return {
+      order: {
+        user: {
+
+        },
       },
-      orderId:'',
-      isLoading:'',
+      orderId: '',
       leave: '',
-      isLoading: false
-    }
+      isLoading: false,
+    };
   },
-  methods:{
-    getOrder(){
+  methods: {
+    getOrder() {
       const vm = this;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/order/${vm.orderId}`;
       vm.isLoading = true;
-      this.$http.get(api).then(response => {
+      this.$http.get(api).then((response) => {
         vm.isLoading = false;
         vm.order = response.data.order;
-      })
+      });
     },
-    payOrder(){
+    payOrder() {
       const vm = this;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/pay/${vm.orderId}`;
 
       this.$validator.validate().then((valid) => {
         if (valid) {
           vm.isLoading = true;
-          this.$http.post(api).then((response)=>{
+          this.$http.post(api).then((response) => {
             vm.isLoading = false;
-            if(response.data.success){
+            if (response.data.success) {
               vm.leave = true;
-              vm.$bus.$emit('message:push','付款完成','success');
+              vm.$bus.$emit('message:push', '付款完成', 'success');
               vm.$router.replace(`/OrderComplete/${vm.orderId}`);
               vm.$bus.$emit('pushCart');
             }
-          })
-        } else{
-          vm.$bus.$emit('message:push','信用卡資訊錯誤!','danger');
+          });
+        } else {
+          vm.$bus.$emit('message:push', '信用卡資訊錯誤!', 'danger');
         }
       });
-    }
+    },
   },
-  created(){
+  created() {
     this.orderId = this.$route.params.orderId;
     this.getOrder();
   },
-  beforeRouteLeave(to, from , next) {
+  beforeRouteLeave(to, from, next) {
     const vm = this;
     if (vm.leave) {
       next();
     } else {
-       $('#CreateOrder').modal('show');    
+      $('#CreateOrder').modal('show');
 
-       $('.confirm').on('click',function(){
-         next();
-       });
+      $('.confirm').on('click', () => {
+        next();
+      });
 
-       $('.cancel').on('click',function(){
-         next(false);
-       });
+      $('.cancel').on('click', () => {
+        next(false);
+      });
     }
-  }
+  },
 };
 </script>

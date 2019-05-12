@@ -11,7 +11,7 @@
       </div>
     </div>
   </div>
-</template>    
+</template>
 
 <script>
 import sidebar from './sidebar';
@@ -19,10 +19,10 @@ import Navbar from './Navbar';
 import Alert from '../../components/AlertMessage';
 
 export default {
-  components:{
+  components: {
     Navbar,
     sidebar,
-    Alert
-  }
-}
+    Alert,
+  },
+};
 </script>

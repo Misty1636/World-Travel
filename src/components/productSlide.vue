@@ -31,13 +31,15 @@
 </template>
 
 <script>
+/* global $ */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'swiper/dist/css/swiper.css';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
 import ProductModal from '../components/productModal';
 
 export default {
-  name: "slide",
-  data(){
+  name: 'slide',
+  data() {
     return {
       swiperOption: {
         slidesPerView: 2,
@@ -45,54 +47,54 @@ export default {
         // loop: true,
         autoplay: {
           delay: 5000,
-          disableOnInteraction: false
+          disableOnInteraction: false,
         },
         pagination: {
           el: '.swiper-pagination',
-          clickable: true
+          clickable: true,
         },
         breakpoints: {
-        768: {
-          slidesPerView: 1,
-          spaceBetween: 30
-        }
-      },
+          768: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+          },
+        },
       },
       products: [],
       temproduct: {},
-      cart:{},
-      loadingtoCart:''
-    }
+      cart: {},
+      loadingtoCart: '',
+    };
   },
-  components:{
+  components: {
     swiper,
     swiperSlide,
-    ProductModal
+    ProductModal,
   },
-  methods:{
+  methods: {
     getProducts() {
       const vm = this;
       let array = [];
       const api2 = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/products/all`;
       vm.getCart();
-      this.$http.get(api2).then((response)=> {
+      this.$http.get(api2).then((response) => {
         array = response.data.products;
 
-        array.forEach(function(item,i) {
-          if(i<8) {
-            let randomNum = Math.floor(Math.random()*array.length);
-            vm.products .push(array.splice(randomNum,1)[0]);
+        array.forEach((item, i) => {
+          if (i < 8) {
+            const randomNum = Math.floor(Math.random() * array.length);
+            vm.products.push(array.splice(randomNum, 1)[0]);
           }
-        })
-      })
+        });
+      });
     },
     getCurrentProduct(id) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/product/${id}`;
       const vm = this;
-      this.$http.get(api).then(response => {    
+      this.$http.get(api).then((response) => {
         $('#productModal').modal('show');
         vm.temproduct = response.data.product;
-      })
+      });
     },
     ToProductsDetaill(id) {
       this.$router.push(`/ProductsDetails/${id}`);
@@ -100,26 +102,26 @@ export default {
     getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
       const vm = this;
-      this.$http.get(api).then(response => {
+      this.$http.get(api).then((response) => {
         vm.cart = response.data.data;
-      })
+      });
     },
-    addtoCart(id,qty=1) {
+    addtoCart(id, qty = 1) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
       const vm = this;
       vm.loadingtoCart = id;
-      this.$http.post(api).then(response => {
+      this.$http.post(api).then(() => {
         $('#productModal').modal('hide');
         vm.loadingtoCart = '';
       });
-      setTimeout(()=> {
-        this.$emit('sildeAddtoCart',id,qty);
-      },500)
+      setTimeout(() => {
+        this.$emit('sildeAddtoCart', id, qty);
+      }, 500);
     },
   },
   mounted() {
     this.getProducts();
-  }
+  },
 };
 </script>
 
@@ -140,6 +142,6 @@ export default {
           }
         }
       }
-    } 
+    }
   }
 </style>

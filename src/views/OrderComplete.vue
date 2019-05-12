@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="px-3 py-sm-5 py-4 OrderComplete-data mb-sm-8 mb-6"> 
+    <div class="px-3 py-sm-5 py-4 OrderComplete-data mb-sm-8 mb-6">
       <h4 class="text-center mb-4">感謝您的訂購，歡迎您再次光臨!</h4>
       <div class="mx-auto yourOrder mb-1">
         <span class="mr-2">您的訂單編號:</span>
@@ -38,36 +38,34 @@
   </div>
 </template>
 
-
 <script>
-
 export default {
-  name: "OrderComplete",
-  data(){
-    return{
-      order:{
-        user:{
-          
-        }
+  name: 'OrderComplete',
+  data() {
+    return {
+      order: {
+        user: {
+
+        },
       },
-      orderId:''
-    }
+      orderId: '',
+    };
   },
-  methods:{
-    getOrder(){
+  methods: {
+    getOrder() {
       const vm = this;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/order/${vm.orderId}`;
-      this.$http.get(api).then(response => {
+      this.$http.get(api).then((response) => {
         vm.order = response.data.order;
-      })
+      });
     },
     toProducts() {
       this.$router.push('/Products');
-    }
+    },
   },
-  created(){
+  created() {
     this.orderId = this.$route.params.orderId;
     this.getOrder();
-  }
+  },
 };
 </script>

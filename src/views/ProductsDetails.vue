@@ -7,7 +7,6 @@
     </loading>
 
     <div class="ProductsDetails pt-7">
-
       <div class="container ProductsDetails-box mx-auto">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent p-0 text-secondary">
@@ -47,7 +46,7 @@
                   總共 {{num}} {{currentProduct.unit}}
                 </option>
               </select>
-              <div class="d-flex mb-3 justify-content-end total-price">
+              <div class="d-flex justify-content-end total-price">
                 <span class="">小計 <strong>{{ counts * currentProduct.price | currency}}</strong></span>
               </div>
               <div class="text-right">
@@ -58,7 +57,7 @@
               </div>
             </div>
           </div>
-        </div> 
+        </div>
 
         <div class="ProductsDetails-description pt-3 mb-6">
           <div class="d-flex align-items-center mb-3">
@@ -72,7 +71,7 @@
           </div>
           <Attention :attentionItem="currentProduct" />
         </div>
-      
+
       </div>
     </div>
 
@@ -81,56 +80,56 @@
 
 
 <script>
-import Attention from "../components/attention";
+/* global $ */
+import Attention from '../components/attention';
 
 export default {
-  name: "ProductsDetails",
-  data(){
-    return{
-      currentProduct:{},
+  name: 'ProductsDetails',
+  data() {
+    return {
+      currentProduct: {},
       currentId: '',
-      counts:1,
+      counts: 1,
       loadingtoCart: '',
-      isLoading: false
-    }
+      isLoading: false,
+    };
   },
-  methods:{
+  methods: {
     getCurrentProduct() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/product/${this.currentId}`;
       const vm = this;
-      this.$http.get(api).then(response => {    
+      this.$http.get(api).then((response) => {
         vm.currentProduct = response.data.product;
-      })
+      });
     },
-    addtoCart(id,qty=1){
+    addtoCart(id, qty = 1) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
       const vm = this;
       vm.loadingtoCart = id;
       vm.isLoading = true;
       const cart = {
         product_id: id,
-        qty
+        qty,
       };
-      this.$http.post(api,{data:cart}).then(response => {  
+      this.$http.post(api, { data: cart }).then(() => {
         vm.isLoading = false;
         vm.loadingtoCart = '';
-        vm.$bus.$emit('message:push','此行程已加入購物車','success');
+        vm.$bus.$emit('message:push', '此行程已加入購物車', 'success');
         vm.$bus.$emit('pushCart');
         vm.counts = 1;
       });
-
-    }
+    },
   },
-  components:{
-    Attention
+  components: {
+    Attention,
   },
-  created(){
+  created() {
     this.currentId = this.$route.params.id;
     this.getCurrentProduct();
   },
-  mounted(){
-    $('html,body').animate({scrollTop:0},10);
-  }
+  mounted() {
+    $('html,body').animate({ scrollTop: 0 }, 10);
+  },
 };
 </script>
 

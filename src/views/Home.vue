@@ -13,62 +13,8 @@
           </div>
         </div>
       </div>
-    </transition>    
+    </transition>
 
-    <header class="header container-fluid">
-      <div class="px-lg-5">
-        <div class="d-flex justify-content-end nav">
-          <div class="offcanvas-bg"></div>  
-          <div class="mr-auto align-self-center">
-            <router-link to="/index" class="d-block">
-              <img src="../assets/worldtravel-logo2.png" style="height:35px;">
-              <img src="../assets/worldtravel-logo.png" style="height:40px;transform: translateX(-8px);" alt="World Travel">
-            </router-link>
-          </div>
-          <ul class="menu list-unstyled d-lg-flex mb-0"> 
-            <li class="d-lg-none">
-              <a href="#" class="close-link"  @click.prevent="closeOffcanvas">
-                <font-awesome-icon icon="times" class="close-menu"/>
-              </a>
-            </li>
-            <li><router-link to="/index"> 首頁</router-link></li>
-            <li class="menu-item"><router-link to="/Guide"> 精彩介紹</router-link></li>
-            <li class="menu-item"><router-link to="/Products"> 行程一覽</router-link></li>
-            <!-- <li class="menu-item"><router-link to="/Login"> 訂單查詢</router-link></li> -->
-            <li class="menu-item"><router-link to="/Login"> 登入</router-link></li>
-          </ul>
-          <div class="cart">
-            <button type="button" class="dropdown-toggle cart-check" data-toggle="dropdown">
-              <font-awesome-icon icon="shopping-cart" class="shopping-cart" />
-              <span class="cart-num  text-center text-white" v-if="cartlength>0">{{cartlength}}</span>
-            </button>
-            <div class="dropdown-menu p-2">
-              <h6 class="p-2"><font-awesome-icon icon="plane" class="mincart-icon mr-2"/>已選擇行程</h6>
-              <table class="table mb-2">
-                <tbody>
-                  <tr class="text-nowrap" v-if="cartlength == 0">
-                    <td>目前沒有行程，趕快報名吧!</td>
-                  </tr>
-                  <tr  v-for="item in cart.carts" :key="item.id">
-                    <td class="px-2"><img :src="item.product.imageUrl" width="30"></td>
-                    <td class="ellipsis px-2 align-middle">{{ item.product.title }}</td>
-                    <td class="text-nowrap px-2 align-middle">{{ item.qty }} {{ item.product.unit }}</td>
-                    <td class="text-right text-nowrap px-2 align-middle mincart-total">{{item.total | currency}}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <button type="button" class="btn btn-block ToCustomerCart" @click="ToCustomerCart">
-                前往購物車
-              </button>
-            </div>
-          </div>
-          <button type="button" class="mobile-link ml-2" @click.prevent="openOffcanvas">
-            <font-awesome-icon icon="bars" />
-          </button>
-        </div>
-      </div>
-    </header>
-      
     <div class="banner-bg">
       <video-bg :sources="['./Croatia short.mp4']">
         <div class="banner-mask d-flex justify-content-center align-items-center">
@@ -80,21 +26,19 @@
               </h1>
             </div>
           </div>
-          <a href="#newzealand" class="explore-icon text-center text-white" @click.prevent="toTarget('newzealand')"> 
+          <a href="#newzealand" class="explore-icon text-center text-white" @click.prevent="toTarget('newzealand')">
             <font-awesome-icon icon="angle-double-down" class="angle-down" />
-          </a>  
+          </a>
         </div>
       </video-bg>
-
     </div>
-    
 
     <section class="container-fluid common newzealand-bg" id="newzealand">
       <div class="newzealand-content">
         <div class="newzealand-box p-md-4 p-3 text-white animated-left">
           <div class="hr-style"></div>
           <h3 class="py-3 mb-0 d-flex justify-content-between">
-            <span>紐西蘭</span>  
+            <span>紐西蘭</span>
             <em class="align-self-end">New Zealand</em>
           </h3>
           <div class="hr-style mb-2"></div>
@@ -107,7 +51,7 @@
             </a>
           </div>
           <div class="d-md-none mt-3">
-            <img src="../assets/images/new-zealand-sm.jpg"> 
+            <img src="../assets/images/new-zealand-sm.jpg">
           </div>
         </div>
       </div>
@@ -121,7 +65,7 @@
         <div class="Maldives-box p-md-4 p-3 text-white animated-right">
           <div class="hr-style"></div>
           <h3 class="py-3 mb-0 d-flex justify-content-between">
-            <span>馬爾地夫</span>  
+            <span>馬爾地夫</span>
             <em class="align-self-end">Maldives</em>
           </h3>
           <div class="hr-style mb-2"></div>
@@ -134,7 +78,7 @@
             </a>
           </div>
           <div class="d-md-none mt-3">
-            <img src="../assets/images/Maldives-sm.jpg"> 
+            <img src="../assets/images/Maldives-sm.jpg">
           </div>
         </div>
       </div>
@@ -148,7 +92,7 @@
         <div class="Egypt-box p-md-4 p-3 text-white animated-left">
           <div class="hr-style"></div>
           <h3 class="py-3 mb-0 d-flex justify-content-between">
-            <span>埃及</span>  
+            <span>埃及</span>
             <em class="align-self-end">Egypt</em>
           </h3>
           <div class="hr-style mb-2"></div>
@@ -161,7 +105,7 @@
             </a>
           </div>
           <div class="d-md-none mt-3">
-            <img src="../assets/images/Egypt-sm.jpg"> 
+            <img src="../assets/images/Egypt-sm.jpg">
           </div>
         </div>
       </div>
@@ -175,7 +119,7 @@
         <div class="Peru-box p-md-4 p-3 text-white animated-right">
           <div class="hr-style"></div>
           <h3 class="py-3 mb-0 d-flex justify-content-between">
-            <span>秘魯</span>  
+            <span>秘魯</span>
             <em class="align-self-end">Peru</em>
           </h3>
           <div class="hr-style mb-2"></div>
@@ -185,14 +129,14 @@
             <a href="#/Products" class="common-btn" @click.prevent="toProducts">
               <font-awesome-icon icon="arrow-right" />
               看行程
-            </a> 
+            </a>
           </div>
           <div class="d-md-none mt-3">
-            <img src="../assets/images/Peru-sm.jpg"> 
+            <img src="../assets/images/Peru-sm.jpg">
           </div>
         </div>
       </div>
-      <a href="#Iceland" class="explore-icon text-center text-white d-none d-md-block"@click.prevent="toTarget('Iceland')">
+      <a href="#Iceland" class="explore-icon text-center text-white d-none d-md-block" @click.prevent="toTarget('Iceland')">
         <font-awesome-icon icon="angle-double-down" class="angle-down" />
       </a>
     </section>
@@ -202,7 +146,7 @@
         <div class="Iceland-box p-md-4 p-3 text-white animated-left">
           <div class="hr-style"></div>
           <h3 class="py-3 mb-0 d-flex justify-content-between">
-            <span>冰島</span>  
+            <span>冰島</span>
             <em class="align-self-end">Iceland</em>
           </h3>
           <div class="hr-style mb-2"></div>
@@ -215,53 +159,42 @@
             </a>
           </div>
           <div class="d-md-none mt-3">
-            <img src="../assets/images/Iceland-sm.jpg"> 
+            <img src="../assets/images/Iceland-sm.jpg">
           </div>
         </div>
       </div>
     </section>
-   
+
   </div>
 </template>
 
 <script>
-
+/* global $ */
 export default {
-  name: "Home",
-  data () {
+  name: 'Home',
+  data() {
     return {
       cart: {},
-      cartlength: 0
-    }
+      cartlength: 0,
+    };
   },
   methods: {
-    closeOffcanvas() {
-      $(".menu").removeClass("open-offcanvas");
-      $(".header").addClass("header-dark");
-      $(".offcanvas-bg").removeClass("opening-menu");
-    },
-    openOffcanvas() {
-      $(".menu").addClass("open-offcanvas");
-      $(".header").removeClass("header-dark");
-      $(".offcanvas-bg").addClass("opening-menu");
-    },
-    scrollToTop(scrollDuration) {
-      const scrollHeight = window.scrollY;
-      const scrollStep = Math.PI / ( scrollDuration / 15 );
-      const cosParameter = scrollHeight / 2;
-      let scrollCount = 0;
-      let scrollMargin;
-      let scrollInterval = setInterval(()=> {
-        if ( window.scrollY != 0 ) {
-          scrollCount = scrollCount + 1;  
-          scrollMargin = cosParameter - cosParameter * Math.cos( scrollCount * scrollStep );
-          window.scrollTo( 0, ( scrollHeight - scrollMargin ) );
-        } 
-        else clearInterval(scrollInterval); 
-      }, 15 );
-    },
+    // scrollToTop(scrollDuration) {
+    //   const scrollHeight = window.scrollY;
+    //   const scrollStep = Math.PI / (scrollDuration / 15);
+    //   const cosParameter = scrollHeight / 2;
+    //   let scrollCount = 0;
+    //   let scrollMargin;
+    //   const scrollInterval = setInterval(() => {
+    //     if (window.scrollY !== 0) {
+    //       scrollCount += 1;
+    //       scrollMargin = cosParameter - cosParameter * Math.cos(scrollCount * scrollStep);
+    //       window.scrollTo(0, (scrollHeight - scrollMargin));
+    //     } else clearInterval(scrollInterval);
+    //   }, 15);
+    // },
     toProducts() {
-      this.$router.push(`/Products`);
+      this.$router.push('/Products');
     },
     getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
@@ -270,17 +203,17 @@ export default {
       this.$http.get(api).then((response) => {
         vm.cart = response.data.data;
         vm.cartlength = vm.cart.carts.length;
-      })
+      });
     },
     ToCustomerCart() {
       this.$router.push('/customerCart');
     },
     toTarget(target) {
-      let top = $('#'+target).offset().top;
-      if(target) {
-        $('html,body').animate({scrollTop:top},1000);
+      const { top } = $(`#${target}`).offset();
+      if (target) {
+        $('html,body').animate({ scrollTop: top }, 1000);
       }
-    }
+    },
     // goTop () {
     //   let self = this
     //   self.timer = setInterval(function () {
@@ -293,57 +226,38 @@ export default {
     //     }
     //   }, 30)
     // }
-    
+
   },
   mounted() {
-    $('html,body').animate({scrollTop:0},10);
+    $('html,body').animate({ scrollTop: 0 }, 10);
 
     setTimeout(() => {
-      $(".loading-box").addClass('index0');
-    }, 2000)
+      $('.loading-box').addClass('index0');
+    }, 2000);
 
-    $(window).scroll(function() {
- 
-      let scrollPos = $(window).scrollTop();
-      let windowHeight = $(window).height();
+    $(window).scroll(() => {
+      const scrollPos = $(window).scrollTop();
+      const windowHeight = $(window).height();
 
-      $(".animated-left").each(function() {
-        let thisPos = $(this).offset().top;
+      // eslint-disable-next-line func-names
+      $('.animated-left').each(function () {
+        const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
-          $(this).addClass("fade-X");
+          $(this).addClass('fade-X');
         }
       });
 
-      $(".animated-right").each(function() {
-        let thisPos = $(this).offset().top;
+      // eslint-disable-next-line func-names
+      $('.animated-right').each(function () {
+        const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
-          $(this).addClass("fade-X");
-        }
-      });
-
-      $(".header").each(function() {
-
-        let thisPos = $(this).offset().top;
-
-        if (windowHeight + scrollPos >= thisPos) {
-          $(this).addClass("header-dark");
-        }
-        if (scrollPos == 0) {
-          $(this).removeClass("header-dark");
+          $(this).addClass('fade-X');
         }
       });
     });
   },
   created() {
     this.getCart();
-  }
+  },
 };
 </script>
-
-<style lang="scss" scoped> 
-  .header{
-    background: transparent;
-    position: fixed;
-    z-index: 10;
-  }
-</style>

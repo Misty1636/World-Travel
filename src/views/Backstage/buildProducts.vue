@@ -10,7 +10,7 @@
     </div>
     <table class="table mt-4 table-responsive-lg">
       <thead>
-        <th width="120">分類</th> 
+        <th width="120">分類</th>
         <th class="text-nowrap">產品名稱</th>
         <th width="120">原價</th>
         <th width="120">售價</th>
@@ -29,129 +29,128 @@
           </td>
           <td class="text-nowrap">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button class="btn btn-outline-primary btn-sm"  @click="openModal(false,item)">編輯</button> 
-              <button class="btn btn-outline-danger btn-sm"  @click="delopenModal(item)">刪除</button> 
+              <button class="btn btn-outline-primary btn-sm"  @click="openModal(false,item)">編輯</button>
+              <button class="btn btn-outline-danger btn-sm"  @click="delopenModal(item)">刪除</button>
             </div>
           </td>
         </tr>
       </tbody>
-    </table> 
-
+    </table>
 
     <Pagination :pages="pagination" @thePage="getProducts" class="d-flex justify-content-center"/>
 
     <ProductsModal :theProducts="temProducts" :uploadStatus="status" :isNews="isNew" @sendupdate="updateProducts" @uploadImg="uploadFile"  ref="files"/>
-   
+
     <DeleteModal :deleteName="temProducts" @deleteCurrent="deleteProducts"/>
 
   </div>
 </template>
 
-
 <script>
-import Pagination  from '../../components/pagination';
-import DeleteModal  from './deleteModal';
+/* global $ */
+import Pagination from '../../components/pagination';
+import DeleteModal from './deleteModal';
 import ProductsModal from './productsModal';
 
 export default {
-  data(){
-    return{
+  data() {
+    return {
       products: [],
-      pagination:{},
+      pagination: {},
       temProducts: {},
       isNew: false,
       isLoading: false,
-      status:{
-        uploadloading:false
-      }
-    }
+      status: {
+        uploadloading: false,
+      },
+    };
   },
-  components:{
+  components: {
     Pagination,
     DeleteModal,
-    ProductsModal
+    ProductsModal,
   },
   methods: {
-    getProducts(page=1) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/products?page=${page}`
+    getProducts(page = 1) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/products?page=${page}`;
       const vm = this;
       vm.isLoading = true;
-      this.$http.get(api).then((response)=> {
-        console.log(response.data.products);
+      this.$http.get(api).then((response) => {
+        // console.log(response.data.products);
         vm.isLoading = false;
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
-      })
+      });
     },
-    openModal(isNew,item) {
-      if(isNew) {
+    openModal(isNew, item) {
+      if (isNew) {
         this.temProducts = {};
         this.isNew = true;
       } else {
-        this.temProducts = Object.assign({},item);
+        this.temProducts = Object.assign({}, item);
         this.isNew = false;
-      };
+      }
       $('#productsModal').modal('show');
     },
     updateProducts() {
       let api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/product`;
       let httpmethods = 'post';
       const vm = this;
-      if(!vm.isNew) {
+      if (!vm.isNew) {
         api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/product/${vm.temProducts.id}`;
-        httpmethods = 'put' ;
+        httpmethods = 'put';
       }
-      this.$http[httpmethods](api,{data:vm.temProducts}).then((response)=> {
-        if(response.data.success) {
+      this.$http[httpmethods](api, { data: vm.temProducts }).then((response) => {
+        if (response.data.success) {
           $('#productsModal').modal('hide');
           vm.getProducts();
         } else {
           vm.getProducts();
-        };
-      })
+        }
+      });
     },
     delopenModal(item) {
-      this.temProducts = Object.assign({},item);
+      this.temProducts = Object.assign({}, item);
       $('#delProductModal').modal('show');
     },
     deleteProducts() {
       const vm = this;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/product/${vm.temProducts.id}`;
-      this.$http.delete(api).then((response)=> {
-        if(response.data.success) {
+      this.$http.delete(api).then((response) => {
+        if (response.data.success) {
           $('#delProductModal').modal('hide');
           vm.getProducts();
         } else {
           vm.getProducts();
-        };
-      })
+        }
+      });
     },
     uploadFile() {
-      console.log(this);
+      // console.log(this);
       const uploadedFile = this.$refs.files.$refs.files.files[0]; // 用元件插入的寫法  files為ref的自訂屬性名稱
       // const uploadedFile = this.$refs.files.files[0]  沒用元件的寫法
       const vm = this;
       const formData = new FormData();
-      formData.append('file-to-upload',uploadedFile);
+      formData.append('file-to-upload', uploadedFile);
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/upload`;
       vm.status.uploadloading = true;
-      this.$http.post(url,formData, {
-        headers:{
-          'Content-type': 'multipart/form-data'
-        }
-      }).then((response)=> {
+      this.$http.post(url, formData, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      }).then((response) => {
         vm.status.uploadloading = false;
-        console.log(response.data);
-        if(response.data.success) {
-          vm.$set(vm.temProducts,'imageUrl',response.data.imageUrl);
+        // console.log(response.data);
+        if (response.data.success) {
+          vm.$set(vm.temProducts, 'imageUrl', response.data.imageUrl);
         } else {
-          this.$bus.$emit('message:push',response.data.message,'danger');
-        };
-      })
-    }
+          this.$bus.$emit('message:push', response.data.message, 'danger');
+        }
+      });
+    },
   },
   created() {
     this.getProducts();
-  }
-}
+  },
+};
 </script>

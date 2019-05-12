@@ -13,10 +13,10 @@
 
 <script>
 export default {
-  name: "AlertMessage",
+  name: 'AlertMessage',
   data() {
     return {
-      messages: []
+      messages: [],
     };
   },
   methods: {
@@ -25,7 +25,7 @@ export default {
       this.messages.push({
         message,
         status,
-        timestamp
+        timestamp,
       });
       this.removeMessageWithTiming(timestamp);
     },
@@ -49,11 +49,11 @@ export default {
     // 自定義名稱 'messsage:push'
     // message: 傳入參數
     // status: 樣式，預設值為 warning
-    vm.$bus.$on("message:push", (message, status = "warning") => {
+    vm.$bus.$on('message:push', (message, status = 'warning') => {
       vm.updateMessage(message, status);
     });
     // vm.$bus.$emit('message:push');
-  }
+  },
 };
 </script>
 

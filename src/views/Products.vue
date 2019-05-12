@@ -26,7 +26,7 @@
           </ul>
         </div>
         <div class="Products-list row">
-          
+
           <div class="col-md-6 col-12 mb-6" v-for='item in products' :key="item.id">
             <div class="list-box">
               <div class="list-img">
@@ -48,9 +48,7 @@
           </div>
         </div>
       </section>
-      
       <Pagination :pages="pagination" @thePage="getProducts" @scrollTarget="scroll" class="d-flex justify-content-center mb-6"/>
-
     </div>
 
     <ProductModal :theProduct="temproduct" :loadingtoCart="loadingtoCart"  @addtheCart="addtoCart" />
@@ -59,113 +57,107 @@
 </template>
 
 <script>
-import Nav from "../components/Nav";
-import slide from "../components/slide";
+/* global $ */
+import slide from '../components/slide';
 import Pagination from '../components/pagination';
 import ProductModal from '../components/productModal';
 
 export default {
-  name: "Products",
-  data(){
+  name: 'Products',
+  data() {
     return {
       continent: '',
       products: [],
       temproduct: {},
-      pagination:{
+      pagination: {
         total_pages: 1,
         current_page: 1,
         has_pre: false,
         has_next: false,
-        page_size: 8 
+        page_size: 8,
       },
       isLoading: false,
-      loadingtoCart:''
-    }
+      loadingtoCart: '',
+    };
   },
-  components:{
-    Nav,
+  components: {
     slide,
     Pagination,
-    ProductModal
+    ProductModal,
   },
-  methods:{
-    currentContinent(item){ //當前區域給予樣式及過濾資料
+  methods: {
+    currentContinent(item) { // 當前區域給予樣式及過濾資料
       this.continent = item;
       this.getProducts();
-      let top = $('#MainProducts').offset().top;
-      $('html,body').animate({scrollTop:(top-47.5)},1000);
-      
+      const { top } = $('#MainProducts').offset();
+      $('html,body').animate({ scrollTop: (top - 47.5) }, 1000);
     },
-    scroll(){ // 分頁點擊滾動
-      setTimeout(()=> {
-        let top = $('#MainProducts').offset().top;
-        $('html,body').animate({scrollTop:(top-47.5)},1000);
-      },1000);
+    scroll() { // 分頁點擊滾動
+      setTimeout(() => {
+        const { top } = $('#MainProducts').offset();
+        $('html,body').animate({ scrollTop: (top - 47.5) }, 1000);
+      }, 1000);
     },
-    getProducts(page=1) {
+    getProducts(page = 1) {
       const vm = this;
       const api2 = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/products/all`;
       vm.isLoading = true;
-      this.$http.get(api2).then((response)=> {
+      this.$http.get(api2).then((response) => {
         vm.isLoading = false;
         vm.products = response.data.products;
 
-        if(vm.continent !== '') { // 判別地區
-          vm.products = vm.products.filter((item)=> {
-            return item.category == vm.continent;
-          })
+        if (vm.continent !== '') { // 判別地區
+          vm.products = vm.products.filter(item => item.category === vm.continent);
         }
- 
         const len = vm.products.length;
         const size = vm.pagination.page_size;
-        vm.pagination.total_pages = Math.ceil(len/size);  //限制最多8個一頁
+        vm.pagination.total_pages = Math.ceil(len / size); // 限制最多8個一頁
         vm.pagination.current_page = page;
-        if(page>1) {
+        if (page > 1) {
           vm.pagination.has_pre = true;
         } else {
           vm.pagination.has_pre = false;
         }
-        if(page <vm.pagination.total_pages) {
+        if (page < vm.pagination.total_pages) {
           vm.pagination.has_next = true;
         } else {
           vm.pagination.has_next = false;
         }
 
-        vm.products = vm.products.slice((0+size*(page-1)),size*page);  //取出第幾頁資料
-
-      })
-
+        // eslint-disable-next-line no-mixed-operators
+        vm.products = vm.products.slice((0 + size * (page - 1)), size * page); // 取出第幾頁資料
+      });
     },
     getCurrentProduct(id) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/product/${id}`;
       const vm = this;
-      this.$http.get(api).then(response => {    
+      this.$http.get(api).then((response) => {
         $('#productModal').modal('show');
         vm.temproduct = response.data.product;
-      })
+      });
     },
     ToProductsDetaill(id) {
       this.$router.push(`/ProductsDetails/${id}`);
     },
-    addtoCart(id,qty=1) {
+    addtoCart(id, qty = 1) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
       const vm = this;
       vm.loadingtoCart = id;
       const cart = {
         product_id: id,
-        qty
+        qty,
       };
-      this.$http.post(api,{data:cart}).then(response => {
+      this.$http.post(api, { data: cart }).then(() => {
         $('#productModal').modal('hide');
         vm.loadingtoCart = '';
-        vm.$bus.$emit('message:push','此行程已加入購物車','success');
+        vm.$bus.$emit('message:push', '此行程已加入購物車', 'success');
         vm.$bus.$emit('pushCart');
       });
     },
   },
   mounted() {
     this.getProducts();
-    $('html,body').animate({scrollTop:0},10);
-  }
+    $('html,body').animate({ scrollTop: 0 }, 10);
+  },
 };
 </script>

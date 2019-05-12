@@ -59,7 +59,7 @@
                   <span class="ml-auto order-item-price">已內含</span>
                 </div>
                 <hr class="m-0">
-              </div>    
+              </div>
             </div>
             <div class="px-3 pb-3 customerCart-order-Nextstep">
               <div class="d-flex justify-content-end align-items-end">
@@ -121,9 +121,7 @@
             </form>
           </div>
         </div>
-
       </div>
-
     </div>
 
     <!-- Modal -->
@@ -144,36 +142,35 @@
   </div>
 </template>
 
-
 <script>
-
+/* global $ */
 export default {
-  name: "CreateOrder",
+  name: 'CreateOrder',
   data() {
     return {
       cart: {},
-      isLoading:false,
-      form:{
-        user:{
-          name:'',
-          email:'',
-          tel:'',
-          address:'',
-          identity:'',
-          passport:''
+      isLoading: false,
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: '',
+          identity: '',
+          passport: '',
         },
-        message:''
+        message: '',
       },
-      leave: false
+      leave: false,
     };
   },
   methods: {
     getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
       const vm = this;
-      this.$http.get(api).then(response => {
+      this.$http.get(api).then((response) => {
         vm.cart = response.data.data;
-      })
+      });
     },
     toCreateOrder() {
       this.$router.push('/CreateOrder');
@@ -182,45 +179,45 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/order`;
       const order = vm.form;
-     
+
       this.$validator.validate().then((valid) => {
         if (valid) {
           vm.isLoading = true;
-          this.$http.post(api,{data:order}).then((response)=> {
+          this.$http.post(api, { data: order }).then((response) => {
             vm.isLoading = false;
-            if(response.data.success){
+            if (response.data.success) {
               vm.leave = true;
               vm.$router.replace(`/OrderPayment/${response.data.orderId}`);
               vm.$bus.$emit('pushCart');
             }
-          })
-        } else{
-          vm.$bus.$emit('message:push','資料不完整!','danger')
+          });
+        } else {
+          vm.$bus.$emit('message:push', '資料不完整!', 'danger');
         }
       });
     },
     backToCart() {
       this.$router.go(-1);
-    }
+    },
   },
   created() {
     this.getCart();
   },
-  beforeRouteLeave(to, from , next) {
+  beforeRouteLeave(to, from, next) {
     const vm = this;
     if (vm.leave) {
       next();
     } else {
-      $('#CreateOrder').modal('show');     
-      
-      $('.confirm').on('click',function() {
-         next();
+      $('#CreateOrder').modal('show');
+
+      $('.confirm').on('click', () => {
+        next();
       });
 
-      $('.cancel').on('click',function() {
+      $('.cancel').on('click', () => {
         next(false);
       });
     }
-  }
+  },
 };
 </script>

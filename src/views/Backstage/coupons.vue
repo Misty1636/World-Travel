@@ -30,13 +30,13 @@
           </td>
           <td class="text-nowrap">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button class="btn btn-outline-primary btn-sm"  @click="openModal(false,item)">編輯</button> 
-              <button class="btn btn-outline-danger btn-sm"  @click="delopenModal(item)">刪除</button> 
+              <button class="btn btn-outline-primary btn-sm"  @click="openModal(false,item)">編輯</button>
+              <button class="btn btn-outline-danger btn-sm"  @click="delopenModal(item)">刪除</button>
             </div>
           </td>
         </tr>
       </tbody>
-    </table> 
+    </table>
 
     <!-- Modal -->
     <div class="modal fade" id="CouponsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,7 +92,6 @@
         </div>
       </div>
     </div>
-  
     <Pagination :pages="pagination" @thePage="getCoupons" class="d-flex justify-content-center"/>
 
     <DeleteModal :deleteName="temCoupons" @deleteCurrent="deleteCoupons"/>
@@ -102,112 +101,111 @@
 
 
 <script>
-import Pagination  from '../../components/pagination'
-import DeleteModal  from '../Backstage/deleteModal'
+/* global $ */
+import Pagination from '../../components/pagination';
+import DeleteModal from '../Backstage/deleteModal';
 
 
 export default {
-  data(){
-    return{
+  data() {
+    return {
       Coupons: [],
-      pagination:{},
+      pagination: {},
       temCoupons: {},
       isNew: false,
-      isLoading: false
-    }
+      isLoading: false,
+    };
   },
-  components:{
+  components: {
     Pagination,
-    DeleteModal
+    DeleteModal,
   },
   methods: {
-    getCoupons(page=1) {
+    getCoupons(page = 1) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/coupons?page=${page}`;
       const vm = this;
       vm.isLoading = true;
-      this.$http.get(api).then((response)=> {
+      this.$http.get(api).then((response) => {
         vm.isLoading = false;
         vm.Coupons = response.data.coupons;
         vm.pagination = response.data.pagination;
-        vm.Coupons.forEach((item)=> {
-          if (this.currentTime> item.due_date) {
+        vm.Coupons.forEach((item) => {
+          if (this.currentTime > item.due_date) {
+            // eslint-disable-next-line no-param-reassign
             item.is_enabled = 0;
-          };
-        })
-      })
+          }
+        });
+      });
     },
-    openModal(isNew,item) {
-      if(isNew) {
+    openModal(isNew, item) {
+      if (isNew) {
         this.temCoupons = {};
         this.isNew = true;
       } else {
-        this.temCoupons = Object.assign({},item);
+        this.temCoupons = Object.assign({}, item);
         this.isNew = false;
-      };
+      }
       $('#CouponsModal').modal('show');
     },
     updateCoupons() {
       let api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/coupon`;
       let httpmethods = 'post';
       const vm = this;
-      if(!vm.isNew) {
+      if (!vm.isNew) {
         api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/coupon/${vm.temCoupons.id}`;
         httpmethods = 'put';
-      };
+      }
 
-      if(!vm.temCoupons.title||!vm.temCoupons.code||!vm.temCoupons.due_date||!vm.temCoupons.percent) {
-        vm.$bus.$emit('message:push','優惠券不完整','danger');
+      if (!vm.temCoupons.title || !vm.temCoupons.code || !vm.temCoupons.due_date || !vm.temCoupons.percent) {
+        vm.$bus.$emit('message:push', '優惠券不完整', 'danger');
         return;
-      } else if (this.currentTime> vm.temCoupons.due_date) {
-        vm.$bus.$emit('message:push','有效期限錯誤','danger');
+      } else if (this.currentTime > vm.temCoupons.due_date) {
+        vm.$bus.$emit('message:push', '有效期限錯誤', 'danger');
         return;
-      };
-      this.$http[httpmethods](api,{data:vm.temCoupons}).then((response)=> {
-  
-        if(response.data.success) {
+      }
+      this.$http[httpmethods](api, { data: vm.temCoupons }).then((response) => {
+        if (response.data.success) {
           $('#CouponsModal').modal('hide');
           vm.getCoupons();
         } else {
           vm.getCoupons();
-        };
-      })
+        }
+      });
     },
     delopenModal(item) {
-      this.temCoupons = Object.assign({},item);
+      this.temCoupons = Object.assign({}, item);
       $('#delProductModal').modal('show');
     },
     deleteCoupons() {
       const vm = this;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/admin/coupon/${vm.temCoupons.id}`;
-      this.$http.delete(api).then((response)=> {
-        if(response.data.success) {
+      this.$http.delete(api).then((response) => {
+        if (response.data.success) {
           $('#delProductModal').modal('hide');
           vm.getCoupons();
         } else {
           vm.getCoupons();
-        };
-      })
-    }
+        }
+      });
+    },
   },
   computed: {
     currentTime() {
-      return (new Date()).valueOf()/1000;
+      return (new Date()).valueOf() / 1000;
     },
     SortCoupons() {
       const vm = this;
       let newCoupons = [];
       if (vm.Coupons.length) {
-        newCoupons = vm.Coupons.sort((a, b) => {
-          return a.due_date<b.due_date?1 : -1;
-        });
-      };
+        newCoupons = vm.Coupons.sort((a, b) => (a.due_date < b.due_date ? 1 : -1));
+      }
       return newCoupons;
-    }
+    },
   },
   created() {
     this.getCoupons();
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">

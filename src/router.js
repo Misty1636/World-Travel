@@ -1,118 +1,91 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-
-// 前台
-import Home from "../src/views/Home.vue";
-import Products from "../src/views/Products.vue";
-import Guide from "../src/views/Guide.vue";
-import ProductsDetails from "../src/views/ProductsDetails.vue";
-import Login from "../src/views/Login.vue";
-import layout from "../src/views/layout.vue";
-import customerCart from "../src/views/customerCart.vue";
-import CreateOrder from "../src/views/CreateOrder.vue";
-import Navlayout from "../src/views/Navlayout.vue";
-import OrderPayment from "../src/views/OrderPayment.vue";
-import OrderComplete from "../src/views/OrderComplete.vue";
-
-// 後台
-import dashboard from "../src/views/Backstage/dashboard.vue";
-import buildProducts from "../src/views/Backstage/buildProducts.vue";
-import coupons from "../src/views/Backstage/coupons.vue";
-import report from "../src/views/Backstage/report.vue";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
 export default new VueRouter({
-  linkActiveClass: "active",
+  linkActiveClass: 'active',
   routes: [
     {
-      path: "*",
-      redirect: "/index"
+      path: '*',
+      redirect: '/index',
     },
     {
-      path: "/",
-      redirect: "/index",
-      component: layout,
+      path: '/',
+      redirect: '/index',
+      component: () => import('../src/views/layout.vue'),
       children: [
         {
-          path: "index",
-          name: "Home",
-          component: Home
+          path: 'index',
+          name: 'Home',
+          component: () => import('../src/views/Home.vue'),
         },
         {
-          path: "/",
-          name: "Navlayout",
-          redirect: "/index",
-          component: Navlayout,
-          children: [
-            {
-              path: "Products",
-              name: "Products",
-              component: Products
-            },
-            {
-              path: "ProductsDetails/:id",
-              name: "ProductsDetails",
-              component: ProductsDetails
-            },
-            {
-              path: "Guide",
-              name: "Guide",
-              component: Guide
-            },
-            {
-              path: "customerCart",
-              name: "customerCart",
-              component: customerCart
-            },
-            {
-              path: "CreateOrder",
-              name: "CreateOrder",
-              component: CreateOrder
-            },
-            {
-              path: "OrderPayment/:orderId",
-              name: "OrderPayment",
-              component: OrderPayment
-            },
-            {
-              path: "OrderComplete/:orderId",
-              name: "OrderComplete",
-              component: OrderComplete
-            }
-          ]
-        }
-      ]
+          path: 'Products',
+          name: 'Products',
+          component: () => import('../src/views/Products.vue'),
+        },
+        {
+          path: 'ProductsDetails/:id',
+          name: 'ProductsDetails',
+          component: () => import('../src/views/ProductsDetails.vue'),
+        },
+        {
+          path: 'Guide',
+          name: 'Guide',
+          component: () => import('../src/views/Guide.vue'),
+        },
+        {
+          path: 'customerCart',
+          name: 'customerCart',
+          component: () => import('../src/views/customerCart.vue'),
+        },
+        {
+          path: 'CreateOrder',
+          name: 'CreateOrder',
+          component: () => import('../src/views/CreateOrder.vue'),
+        },
+        {
+          path: 'OrderPayment/:orderId',
+          name: 'OrderPayment',
+          component: () => import('../src/views/OrderPayment.vue'),
+        },
+        {
+          path: 'OrderComplete/:orderId',
+          name: 'OrderComplete',
+          component: () => import('../src/views/OrderComplete.vue'),
+        },
+      ],
     },
     {
-      path: "/Login",
-      name: "Login",
-      component: Login
+      path: '/Login',
+      name: 'Login',
+      component: () => import('../src/views/Login.vue'),
     },
     {
-      name: "dashboard",
-      path: "/admin",
-      component: dashboard,
+      name: 'dashboard',
+      path: '/admin',
+      component: () => import('../src/views/Backstage/dashboard.vue'),
       children: [
         {
-          name: "buildProducts",
-          path: "buildProducts",
-          component: buildProducts,
-          meta: { requiresAuth: true }
+          name: 'buildProducts',
+          path: 'buildProducts',
+          component: () => import('../src/views/Backstage/buildProducts.vue'),
+          meta: { requiresAuth: true },
         },
         {
-          name: "coupons",
-          path: "coupons",
-          component: coupons,
-          meta: { requiresAuth: true }
+          name: 'coupons',
+          path: 'coupons',
+          component: () => import('../src/views/Backstage/coupons.vue'),
+          meta: { requiresAuth: true },
         },
         {
-          name: "report",
-          path: "report",
-          component: report,
-          meta: { requiresAuth: true }
-        }
-      ]
-    }
-  ]
+          name: 'report',
+          path: 'report',
+          component: () => import('../src/views/Backstage/report.vue'),
+          meta: { requiresAuth: true },
+        },
+      ],
+    },
+  ],
 });

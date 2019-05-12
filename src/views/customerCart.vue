@@ -82,7 +82,7 @@
                     <button class="btn btn-outline-secondary" type="button" @click="addCouponCode">套用優惠碼</button>
                   </div>
                 </div>
-              </div>    
+              </div>
             </div>
             <div class="p-3 customerCart-order-Nextstep">
               <div class="d-flex justify-content-end mb-3 align-items-end">
@@ -92,7 +92,7 @@
               <button type="button" @click="toCreateOrder">下一步</button>
             </div>
           </div>
-  
+
         </div>
       </div>
 
@@ -101,88 +101,89 @@
 </template>
 
 <script>
-import productSlide from "../components/productSlide";
+/* global $ */
+import productSlide from '../components/productSlide';
 
 export default {
-  name: "customerCart",
+  name: 'customerCart',
   data() {
     return {
       cart: {},
-      cartItem:'',
-      cartdisable:'',
-      coupon_code:'',
-      isLoading:false
+      cartItem: '',
+      cartdisable: '',
+      coupon_code: '',
+      isLoading: false,
     };
   },
   methods: {
-    getCart(){
+    getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
       const vm = this;
-      this.$http.get(api).then(response => {
+      this.$http.get(api).then((response) => {
         vm.cart = response.data.data;
-      })
+      });
     },
-    addtoCart(id,qty=1){
+    addtoCart(id, qty = 1) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
       const vm = this;
       vm.isLoading = true;
       const cart = {
         product_id: id,
-        qty
+        qty,
       };
-      this.$http.post(api,{data:cart}).then(response => {
+      this.$http.post(api, { data: cart }).then(() => {
         vm.isLoading = false;
-        $('#productModal').modal('hide')
-        vm.$bus.$emit('message:push','此行程已加入購物車','success');
+        $('#productModal').modal('hide');
+        vm.$bus.$emit('message:push', '此行程已加入購物車', 'success');
         vm.$bus.$emit('pushCart');
         this.getCart();
       });
     },
-    deleteCart(id){
+    deleteCart(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart/${id}`;
       vm.disables = true;
       vm.cartItem = id;
       vm.cartdisable = id;
       vm.isLoading = true;
-      this.$http.delete(api).then((response)=> {
+      this.$http.delete(api).then((response) => {
         vm.isLoading = false;
         vm.cartItem = '';
-        if(response.data.success) {
+        if (response.data.success) {
           vm.getCart();
-          vm.$bus.$emit('message:push','成功刪除此行程','success');
+          vm.$bus.$emit('message:push', '成功刪除此行程', 'success');
           vm.$bus.$emit('pushCart');
         }
-      })
+      });
     },
-    addCouponCode(){
+    addCouponCode() {
       const vm = this;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/coupon`;
       const coupon = {
-        code: vm.coupon_code
-      }
+        code: vm.coupon_code,
+      };
       vm.isLoading = true;
-      this.$http.post(api,{data:coupon}).then((response)=> {
-       vm.isLoading = false;
-        if(response.data.success) {
-          vm.$bus.$emit('message:push','已套用優惠券','success');
+      this.$http.post(api, { data: coupon }).then((response) => {
+        vm.isLoading = false;
+        if (response.data.success) {
+          vm.$bus.$emit('message:push', '已套用優惠券', 'success');
           vm.getCart();
-          vm.coupon_code='';
+          vm.coupon_code = '';
         } else {
-          vm.$bus.$emit('message:push',response.data.message,'danger');
-          vm.coupon_code='';
+          vm.$bus.$emit('message:push', response.data.message, 'danger');
+          vm.coupon_code = '';
         }
-      })
+      });
     },
     toCreateOrder() {
       this.$router.push('/CreateOrder');
-    }
+    },
   },
   components: {
-    productSlide
+    productSlide,
   },
   created() {
     this.getCart();
-  }
+  },
 };
 </script>

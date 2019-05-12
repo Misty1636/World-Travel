@@ -18,11 +18,19 @@
 }
 
 .modal-btn {
+  border: none;
+  padding: .5rem 0;
   background: $Bright-red;
   color: $white;
+  border-radius: 3px;
+  outline: 0;
+  transition: all .3s;
   &:hover {
     background: $Strong-red;
     color: $white;
+  }
+  &:focus{
+    outline: 0;
   }
 }
 

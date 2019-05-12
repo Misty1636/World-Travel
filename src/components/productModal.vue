@@ -29,7 +29,7 @@
             <div class="text-nowrap mr-4 modal-total">
               小計 <strong>{{ counts * theProduct.price | currency}}</strong>
             </div>
-            <button type="button" class="btn modal-btn px-4"
+            <button type="button" class="modal-btn px-4"
               @click="addtoCart(theProduct.id, counts)" :class="{disabled:theProduct.id === cartdisable}">
                立即報名
               <font-awesome-icon icon="spinner" spin v-if="theProduct.id === loadingtoCart"/>
@@ -46,26 +46,25 @@ export default {
   props: {
     theProduct: {
       type: Object,
-      default: {},
+      default: () => {},
     },
-    loadingtoCart: ''
+    loadingtoCart: null,
   },
-  data(){
+  data() {
     return {
-      counts:1,
-      cartdisable:''
-    }
+      counts: 1,
+      cartdisable: '',
+    };
   },
-
   methods: {
-    addtoCart(id,qty){
+    addtoCart(id, qty) {
       this.cartdisable = id;
-      this.$emit('addtheCart',id,qty);
-      setTimeout(()=>{
+      this.$emit('addtheCart', id, qty);
+      setTimeout(() => {
         this.cartdisable = '';
         this.counts = 1;
-      },1000)
-    }
-  }
+      }, 1000);
+    },
+  },
 };
 </script>

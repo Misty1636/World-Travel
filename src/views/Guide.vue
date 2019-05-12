@@ -3,11 +3,11 @@
     <div class="Guide">
       <div class="Guide-bg">
         <img class="img-fluid" src="../assets/spain/spain.png" >
-        <a href="#Guide-strat" class="explore-icon text-center text-white" @click.prevent="toTarget('Guide-strat')"> 
+        <a href="#Guide-strat" class="explore-icon text-center text-white" @click.prevent="toTarget('Guide-strat')">
           <font-awesome-icon icon="angle-double-down" class="angle-down" />
-        </a> 
+        </a>
       </div>
-      
+
       <section class="Guide-strat-box container-fluid" id="Guide-strat">
         <div class="Guide-title row">
           <div class="col d-flex  justify-content-center align-items-center flex-column">
@@ -61,7 +61,7 @@
                <span>璀璨的回教文化</span>
              </div>
            </div>
-        </div> 
+        </div>
       </section>
 
       <section class="mb-8 animated-bottom">
@@ -136,15 +136,12 @@
           <div class="col d-flex justify-content-center align-items-center Boqueria-title">
             <h3 class="mb-0 chinese">博蓋利亞市場</h3>
           </div>
-          
           <div class="col-xl-5 col-lg-7 col-md-8  Boqueria-img my-2 my-md-0">
             <img class="img-fluid" src="../assets/spain/博蓋利亞市場-01.jpg">
           </div>
-
           <div class="col d-flex justify-content-center align-items-center">
             <h3 class="mb-0 english">Boqueria</h3>
           </div>
-
         </div>
         <hr class="d-md-none">
       </section>
@@ -190,7 +187,7 @@
             </a>
           </div>
         </div>
-        
+
       </div>
 
     </div>
@@ -199,54 +196,51 @@
 
 
 <script>
-import Nav from "../components/Nav";
-
+/* global $ */
 export default {
-  name: "Guide",
-  components:{
-    Nav
-  },
+  name: 'Guide',
   methods: {
     toTarget(target) {
-      let top = $('#'+target).offset().top;
-      if(target) {
-        $('html,body').animate({scrollTop:top},1000);
+      const { top } = $(`#${target}`).offset();
+      if (target) {
+        $('html,body').animate({ scrollTop: top }, 1000);
       }
     },
-    toSpain(){
+    toSpain() {
       this.$router.push('/ProductsDetails/-LdXqJIhL8dBMDYV2vg4');
-    }
+    },
   },
-  mounted(){
-     $('html,body').animate({scrollTop:0},10);
+  mounted() {
+    $('html,body').animate({ scrollTop: 0 }, 10);
 
-    $(window).scroll(function() {
+    $(window).scroll(() => {
+      const scrollPos = $(window).scrollTop();
+      const windowHeight = $(window).height();
 
-      let scrollPos = $(window).scrollTop();
-      let windowHeight = $(window).height();
-
-      $(".animated-left").each(function() {
-        let thisPos = $(this).offset().top;
+      // eslint-disable-next-line func-names
+      $('.animated-left').each(function () {
+        const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
-          $(this).addClass("fade-X");
+          $(this).addClass('fade-X');
         }
       });
 
-      $(".animated-right").each(function() {
-        let thisPos = $(this).offset().top;
+      // eslint-disable-next-line func-names
+      $('.animated-right').each(function () {
+        const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
-          $(this).addClass("fade-X");
+          $(this).addClass('fade-X');
         }
       });
 
-      $(".animated-bottom").each(function() {
-        let thisPos = $(this).offset().top;
+      // eslint-disable-next-line func-names
+      $('.animated-bottom').each(function () {
+        const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
-          $(this).addClass("bottom-In");
+          $(this).addClass('bottom-In');
         }
       });
-
     });
-  }
+  },
 };
 </script>

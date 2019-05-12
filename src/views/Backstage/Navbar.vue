@@ -21,13 +21,13 @@ export default {
       const api = `${process.env.VUE_APP_API}/logout`;
       const vm = this;
 
-      this.$http.post(api).then((response)=> {
-        if(response.data.success) {  
+      this.$http.post(api).then((response) => {
+        if (response.data.success) {
           vm.$router.push('/signin');
-        };
-      })
-    }
-  }
-}
+        }
+      });
+    },
+  },
+};
 </script>
 

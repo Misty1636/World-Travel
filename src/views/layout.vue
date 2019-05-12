@@ -1,5 +1,6 @@
 <template>
   <div class="wrap">
+    <Nav />
     <router-view />
     <Footer />
     <ToTop />
@@ -8,14 +9,16 @@
 
 
 <script>
-import Footer from "../components/Footer";
-import ToTop from "../components/toTop";
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
+import ToTop from '../components/toTop';
 
 export default {
-  name: "layout",
-  components:{
+  name: 'layout',
+  components: {
+    Nav,
     Footer,
-    ToTop
+    ToTop,
   },
 };
 </script>

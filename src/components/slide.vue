@@ -7,7 +7,7 @@
           <div class="swipertext d-flex flex-column align-items-center">
             <h2 class="mb-1 pb-1">{{slide.country}}</h2>
             <span>{{slide.en}}</span>
-          </div>  
+          </div>
         </div>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
@@ -16,67 +16,60 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'swiper/dist/css/swiper.css';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
 
 export default {
-  name: "slide",
-  data(){
+  name: 'slide',
+  data() {
     return {
       swiperOption: {
         loop: true,
         centeredSlides: true,
-        effect : 'fade',
+        effect: 'fade',
         autoplay: {
           delay: 5000,
-          disableOnInteraction: false
+          disableOnInteraction: false,
         },
         pagination: {
           el: '.swiper-pagination',
-          clickable: true
-        }
+          clickable: true,
+        },
       },
       swiperSlides: [
         {
           imgPath: 'pro/Fiji-lg.jpg',
           country: '斐濟',
-          en: 'Fiji'
-        }, 
+          en: 'Fiji',
+        },
         {
           imgPath: 'pro/Japan-lg2.jpg',
           country: '日本',
-          en: 'Japan'
-        }, 
+          en: 'Japan',
+        },
         {
           imgPath: 'pro/Paris-lg.jpg',
           country: '法國',
-          en: 'France'
-        }, 
+          en: 'France',
+        },
         {
           imgPath: 'pro/Switzerland-lh.jpg',
           country: '瑞士',
-          en: 'Swiss'
-        }, 
+          en: 'Swiss',
+        },
         {
           imgPath: 'pro/China-lg.jpg',
           country: '中國',
-          en: 'China'
-        }
-      ]
-    }
+          en: 'China',
+        },
+      ],
+    };
   },
-  components:{
+  components: {
     swiper,
-    swiperSlide
+    swiperSlide,
   },
-  mounted(){
-    // $('.swiper-container').on('mouseover', function(e) {
-    //   this.swiper.autoplay.stop()
-    // })
-    // $('.swiper-container').on('mouseout', function(e) {
-    //   this.swiper.autoplay.start()
-    // })
-  }
 };
 </script>
 
@@ -106,7 +99,7 @@ export default {
 
   .swipertext{
     border-radius: 50%;
-    background:rgba(#444444,.5); 
+    background:rgba(#444444,.5);
     color: #f2f2f2;
     padding: 16px 22.25px;
     @media (min-width: 768px){

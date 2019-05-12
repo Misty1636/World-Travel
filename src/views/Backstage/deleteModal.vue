@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-    </div>      
+    </div>
   </div>
 </template>
 
@@ -30,14 +30,14 @@
 export default {
   props: {
     deleteName: {
-        type: Object,
-        default: {}
-    }
+      type: Object,
+      default: () => {},
+    },
   },
   methods: {
     Checkdelete() {
       this.$emit('deleteCurrent');
-    }
-  }
-}
+    },
+  },
+};
 </script>

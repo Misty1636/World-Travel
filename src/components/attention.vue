@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="pl-4 text-secondary mb-0" v-if="attentionItem.category"> 
+    <ul class="pl-4 text-secondary mb-0" v-if="attentionItem.category">
       <li>行程僅供出發前旅客參考，正確行程、航班及旅館依行前說明會資料為準。</li>
       <li v-if="attentionItem.category =='歐洲'">本行程最低出團人數為16人以上(含)，最多為42人以下(含)，本公司將指派持有合格領隊執照之領隊全程隨團服務。請旅客於報名時注意此資訊。</li>
       <li v-if="attentionItem.category =='亞洲'">本行程最低出團人數為16人以上(含)，最多為50人以下(含)，本公司將指派持有合格領隊執照之領隊全程隨團服務。請旅客於報名時注意此資訊。</li>
@@ -49,11 +49,8 @@ export default {
   props: {
     attentionItem: {
       type: Object,
-      default: {},
+      default: () => {},
     },
-  },
-  methods: {
-    
   },
 };
 </script>

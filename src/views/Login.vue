@@ -59,42 +59,42 @@
 </template>
 
 <script>
-import Alert from "../components/AlertMessage";
+import Alert from '../components/AlertMessage';
 
 export default {
   name: 'Login',
   props: {
-    msg: String
+    msg: String,
   },
   data() {
     return {
       user: {
         username: '',
-        password: ''
+        password: '',
       },
-      isLoading: false
-    }
-  }, 
+      isLoading: false,
+    };
+  },
   methods: {
     signin() {
       const api = `${process.env.VUE_APP_API}/admin/signin`;
       const vm = this;
       vm.isLoading = true;
-      this.$http.post(api,vm.user).then((response)=> {
+      this.$http.post(api, vm.user).then((response) => {
         vm.isLoading = false;
-        if(response.data.success) {  
+        if (response.data.success) {
           vm.$router.push('/admin/buildProducts');
-          vm.$bus.$emit('message:push','登入成功','success');
+          vm.$bus.$emit('message:push', '登入成功', 'success');
         } else {
           vm.user.username = '';
           vm.user.password = '';
-          vm.$bus.$emit('message:push','帳號或密碼有誤','danger');
+          vm.$bus.$emit('message:push', '帳號或密碼有誤', 'danger');
         }
       });
-    }
+    },
   },
-  components:{
-    Alert
-  }
-}
+  components: {
+    Alert,
+  },
+};
 </script>

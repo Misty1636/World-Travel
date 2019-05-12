@@ -13,7 +13,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/admin/coupons"> 
+          <router-link class="nav-link" to="/admin/coupons">
             <span data-feather="layers"></span>
             <font-awesome-icon icon="money-bill" />
             優惠券
@@ -33,13 +33,13 @@
 
 <script>
 export default {
-  name:'sidebar',
+  name: 'sidebar',
   data() {
     return {
-      current: {}
-    }
-  }
-}
+      current: {},
+    };
+  },
+};
 </script>
 
 <style scoped lang="scss">
