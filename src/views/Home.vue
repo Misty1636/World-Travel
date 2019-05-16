@@ -16,23 +16,6 @@
       </div>
     </div>
 
-    <!-- <transition name="fade">
-      <div class="loading-box" v-if="show">
-        <div class="loading-bg d-flex justify-content-center align-items-center h-100">
-          <div class="loading-line line1"></div>
-          <div class="loading-line line2"></div>
-          <div class="loading-line line3"></div>
-          <div class="loading-line line4"></div>
-          <div class="d-flex flex-column loading-img justify-content-center">
-            <span class="text-center h3 mb-0">
-              <img src="../assets/Opening.png">
-              <em></em>
-            </span>
-          </div>
-        </div>
-      </div>
-    </transition> -->
-
     <div class="banner-bg">
       <video-bg :sources="['./Croatia short.mp4']" class="video-bg">
         <div class="banner-mask d-flex justify-content-center align-items-center">
