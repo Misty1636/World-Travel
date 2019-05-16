@@ -1,7 +1,22 @@
 <template>
   <div id="home">
 
-    <transition name="fade">
+    <div class="loading-box">
+      <div class="loading-bg d-flex justify-content-center align-items-center h-100">
+        <div class="loading-line line1"></div>
+        <div class="loading-line line2"></div>
+        <div class="loading-line line3"></div>
+        <div class="loading-line line4"></div>
+        <div class="d-flex flex-column loading-img justify-content-center">
+          <span class="text-center h3 mb-0">
+            <img src="../assets/Opening.png">
+            <em></em>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- <transition name="fade">
       <div class="loading-box" v-if="show">
         <div class="loading-bg d-flex justify-content-center align-items-center h-100">
           <div class="loading-line line1"></div>
@@ -16,10 +31,10 @@
           </div>
         </div>
       </div>
-    </transition>
+    </transition> -->
 
     <div class="banner-bg">
-      <video-bg :sources="['./Croatia short.mp4']" class="d-md-block d-none">
+      <video-bg :sources="['./Croatia short.mp4']" class="video-bg">
         <div class="banner-mask d-flex justify-content-center align-items-center">
           <div class="p-2 title-bg">
             <div class="title-box p-3 pr-4">
@@ -222,10 +237,13 @@ export default {
     },
   },
   mounted() {
-    const vm = this;
     setTimeout(() => {
-      vm.show = false;
+      $('.loading-box').addClass('index-opacity');
     }, 2500);
+
+    setTimeout(() => {
+      $('.loading-box').addClass('d-none');
+    }, 4000);
 
     $(window).scroll(() => {
       const scrollPos = $(window).scrollTop();
