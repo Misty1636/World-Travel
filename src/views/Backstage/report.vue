@@ -106,27 +106,6 @@ export default {
       });
       return str;
     },
-    // pro(){
-    //   let str = []
-    //   let xyz = []
-    //   let abc = []
-    //   let yyy = []
-    //   this.allOrder.forEach((item)=>{
-    //      str.push(item.products)
-
-    //   })
-
-    //   for(let item in str[0]){
-    //     // console.log(`物件屬性 ${item}, 屬性值 ${data[0][item]}`);
-    //     xyz.push(str[0][item])
-    //   }
-
-    //   for(let item in xyz[0]){
-    //     // console.log(`物件屬性 ${item}, 屬性值 ${data[0][item]}`);
-    //     abc.push(xyz[0][item])
-    //   }
-    //   return xyz;
-    // }
   },
   mounted() {
     this.getAllOrder();

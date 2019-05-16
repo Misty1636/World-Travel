@@ -42,6 +42,7 @@
 </template>
 
 <script>
+/* global $ */
 export default {
   props: {
     theProduct: {
@@ -58,13 +59,24 @@ export default {
   },
   methods: {
     addtoCart(id, qty) {
-      this.cartdisable = id;
-      this.$emit('addtheCart', id, qty);
-      setTimeout(() => {
-        this.cartdisable = '';
-        this.counts = 1;
-      }, 1000);
+      const vm = this;
+      vm.cartdisable = id;
+      this.$store.dispatch('CartModule/addtoCart', { id, qty }).then(() => {
+        $('#productModal').modal('hide');
+        setTimeout(() => {
+          vm.cartdisable = '';
+          vm.counts = 1;
+        }, 500);
+      });
     },
   },
 };
 </script>
+<style lang="scss" scoped>
+  .close{
+    outline: 0;
+    &:focus{
+      outline: 0;
+    }
+  }
+</style>

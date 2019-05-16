@@ -103,7 +103,7 @@
 <script>
 /* global $ */
 import Pagination from '../../components/pagination';
-import DeleteModal from '../Backstage/deleteModal';
+import DeleteModal from './deleteModal';
 
 
 export default {
@@ -159,7 +159,8 @@ export default {
       if (!vm.temCoupons.title || !vm.temCoupons.code || !vm.temCoupons.due_date || !vm.temCoupons.percent) {
         vm.$bus.$emit('message:push', '優惠券不完整', 'danger');
         return;
-      } else if (this.currentTime > vm.temCoupons.due_date) {
+      }
+      if (this.currentTime > vm.temCoupons.due_date) {
         vm.$bus.$emit('message:push', '有效期限錯誤', 'danger');
         return;
       }

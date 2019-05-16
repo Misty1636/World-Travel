@@ -1,3 +1,6 @@
+.ProductsDetails {
+  min-height: 100vh;
+}
 .ProductsDetails-content {
   @include media-breakpoint-down(md) {
     border: 1px solid $light-gray;

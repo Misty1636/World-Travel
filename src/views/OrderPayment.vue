@@ -126,55 +126,38 @@
 
 <script>
 /* global $ */
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'OrderPayment',
   data() {
     return {
-      order: {
-        user: {
-
-        },
-      },
       orderId: '',
-      leave: '',
-      isLoading: false,
+      leave: false,
     };
   },
   methods: {
-    getOrder() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/order/${vm.orderId}`;
-      vm.isLoading = true;
-      this.$http.get(api).then((response) => {
-        vm.isLoading = false;
-        vm.order = response.data.order;
-      });
-    },
     payOrder() {
       const vm = this;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/pay/${vm.orderId}`;
 
       this.$validator.validate().then((valid) => {
         if (valid) {
-          vm.isLoading = true;
-          this.$http.post(api).then((response) => {
-            vm.isLoading = false;
-            if (response.data.success) {
-              vm.leave = true;
-              vm.$bus.$emit('message:push', '付款完成', 'success');
-              vm.$router.replace(`/OrderComplete/${vm.orderId}`);
-              vm.$bus.$emit('pushCart');
-            }
+          this.$store.dispatch('OrderModule/payOrder', this.orderId).then(() => {
+            vm.leave = true;
           });
         } else {
-          vm.$bus.$emit('message:push', '信用卡資訊錯誤!', 'danger');
+          this.$store.dispatch('AlertModule/updateMessage', { message: '信用卡資訊錯誤!', status: 'danger' });
         }
       });
     },
   },
+  computed: {
+    ...mapGetters(['isLoading']),
+    ...mapGetters('OrderModule', ['order']),
+  },
   created() {
     this.orderId = this.$route.params.orderId;
-    this.getOrder();
+    this.$store.dispatch('OrderModule/getOrder', this.orderId);
   },
   beforeRouteLeave(to, from, next) {
     const vm = this;

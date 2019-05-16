@@ -1,5 +1,9 @@
 .banner-bg {
   height: 100vh;
+  @include media-breakpoint-down(sm) {
+    background: url(../src/assets/images/Croatia-lg.jpg) no-repeat center center;
+    background-size: cover;
+  }
 }
 .banner-mask {
   height: 100%;
@@ -13,9 +17,39 @@
   position: fixed;
   top: 0;
   z-index: 111;
-  &.index0 {
-    z-index: -1;
-    display: none;
+  .loading-line{
+    position: absolute;
+    z-index: 5;
+  }
+  .line1{
+    top: 50%;
+    left:0;
+    transform: translateY(-80px);
+    border-top: 1px solid $Vivid-cyan;
+    animation: line-width .8s linear;
+  }
+  .line2{
+    left: 50%;
+    top: 0;
+    transform: translateX(150px);
+    width: 1px;
+    border-right: 1px solid $Vivid-cyan;
+    animation: line-height .8s linear .4s;
+  }
+  .line3{
+    top: 50%;
+    right: 0;
+    transform: translateY(-10px);
+    border-top: 1px solid $Vivid-cyan;
+    animation: line-width .8s linear .8s;
+  }
+  .line4{
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-150px);
+    width: 1px;
+    border-right: 1px solid $Vivid-cyan;
+    animation: line-height .8s linear 1.2s;
   }
 }
 
@@ -24,13 +58,14 @@
 }
 
 .loading-img {
-  overflow: hidden;
+  position: relative;
   padding: 0.5rem 0;
-  transform: translateY(-30px);
+  transform: translateY(-50px);
   span {
     color: $dark-gray;
     font-weight: 700;
     position: relative;
+    animation: scalescalse 2s linear 2s;
     em {
       top: 0;
       left: 0;
@@ -46,7 +81,7 @@
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.8s;
+  transition: opacity 1.2s;
 }
 
 .fade-enter,

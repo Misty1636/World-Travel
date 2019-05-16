@@ -24,18 +24,16 @@ import 'jquery';
 import './jquery-vendor';
 
 // 背景套件
-// eslint-disable-next-line import/first
 import VideoBg from 'vue-videobg';
 
 // 驗證套件
-// eslint-disable-next-line import/first
 import VeeValidate from 'vee-validate';
-// eslint-disable-next-line import/first
 import zhTW from 'vee-validate/dist/locale/zh_TW';
 
 // 自訂義套件
 import App from './App';
 import router from './router';
+import store from './store';
 import './bus';
 import currencyFilter from './filters/currency';
 import timetampsFilter from './filters/timetamps';
@@ -64,9 +62,12 @@ axios.defaults.withCredentials = true;
 new Vue({
   render: h => h(App),
   router,
+  store,
 }).$mount('#app');
 
 router.beforeEach((to, from, next) => {
+  /* global $ */
+  $('.modal').modal('hide');
   if (to.meta.requiresAuth) {
     const api = `${process.env.VUE_APP_API}/api/user/check`;
 

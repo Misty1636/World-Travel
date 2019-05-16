@@ -2,10 +2,13 @@
   <div id="home">
 
     <transition name="fade">
-      <div class="loading-box">
+      <div class="loading-box" v-if="show">
         <div class="loading-bg d-flex justify-content-center align-items-center h-100">
+          <div class="loading-line line1"></div>
+          <div class="loading-line line2"></div>
+          <div class="loading-line line3"></div>
+          <div class="loading-line line4"></div>
           <div class="d-flex flex-column loading-img justify-content-center">
-            <img src="../assets/001.gif">
             <span class="text-center h3 mb-0">
               <img src="../assets/Opening.png">
               <em></em>
@@ -16,7 +19,7 @@
     </transition>
 
     <div class="banner-bg">
-      <video-bg :sources="['./Croatia short.mp4']">
+      <video-bg :sources="['./Croatia short.mp4']" class="d-md-block d-none">
         <div class="banner-mask d-flex justify-content-center align-items-center">
           <div class="p-2 title-bg">
             <div class="title-box p-3 pr-4">
@@ -31,6 +34,19 @@
           </a>
         </div>
       </video-bg>
+      <div class="banner-mask d-flex justify-content-center align-items-center d-md-none">
+        <div class="p-2 title-bg">
+          <div class="title-box p-3 pr-4">
+            <small class="mb-3 text-white">Discover All That's Possible</small>
+            <h1 class="mb-0 text-white">
+              <em>Enjoy Your Travel</em>
+            </h1>
+          </div>
+        </div>
+        <a href="#newzealand" class="explore-icon text-center text-white" @click.prevent="toTarget('newzealand')">
+          <font-awesome-icon icon="angle-double-down" class="angle-down" />
+        </a>
+      </div>
     </div>
 
     <section class="container-fluid common newzealand-bg" id="newzealand">
@@ -174,8 +190,7 @@ export default {
   name: 'Home',
   data() {
     return {
-      cart: {},
-      cartlength: 0,
+      show: true,
     };
   },
   methods: {
@@ -196,15 +211,6 @@ export default {
     toProducts() {
       this.$router.push('/Products');
     },
-    getCart() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
-      const vm = this;
-
-      this.$http.get(api).then((response) => {
-        vm.cart = response.data.data;
-        vm.cartlength = vm.cart.carts.length;
-      });
-    },
     ToCustomerCart() {
       this.$router.push('/customerCart');
     },
@@ -214,50 +220,31 @@ export default {
         $('html,body').animate({ scrollTop: top }, 1000);
       }
     },
-    // goTop () {
-    //   let self = this
-    //   self.timer = setInterval(function () {
-    //     let osTop = document.documentElement.scrollTop || document.body.scrollTop
-    //     let ispeed = Math.floor(-osTop / 5)
-    //     document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed
-    //     self.isTop = true
-    //     if (osTop === 0) {
-    //       clearInterval(self.timer)
-    //     }
-    //   }, 30)
-    // }
-
   },
   mounted() {
-    $('html,body').animate({ scrollTop: 0 }, 10);
-
+    const vm = this;
     setTimeout(() => {
-      $('.loading-box').addClass('index0');
-    }, 2000);
+      vm.show = false;
+    }, 2500);
 
     $(window).scroll(() => {
       const scrollPos = $(window).scrollTop();
       const windowHeight = $(window).height();
 
-      // eslint-disable-next-line func-names
-      $('.animated-left').each(function () {
+      $('.animated-left').each(function animatedleft() {
         const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
           $(this).addClass('fade-X');
         }
       });
 
-      // eslint-disable-next-line func-names
-      $('.animated-right').each(function () {
+      $('.animated-right').each(function animatedright() {
         const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
           $(this).addClass('fade-X');
         }
       });
     });
-  },
-  created() {
-    this.getCart();
   },
 };
 </script>

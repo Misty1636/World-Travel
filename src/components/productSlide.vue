@@ -1,7 +1,7 @@
 <template>
   <div class="swiper">
     <swiper :options="swiperOption">
-      <swiper-slide v-for='item in products' :key="item.id">
+      <swiper-slide v-for='item in theslideproducts' :key="item.id">
         <div class="px-2">
           <div class="list-box">
             <div class="list-img">
@@ -25,17 +25,18 @@
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
 
-    <ProductModal :theProduct="temproduct" :loadingtoCart="loadingtoCart"  @addtheCart="addtoCart" />
+    <ProductModal :theProduct="temproduct" :loadingtoCart="cartItem"/>
 
   </div>
 </template>
 
 <script>
 /* global $ */
+import { mapGetters } from 'vuex';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'swiper/dist/css/swiper.css';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
-import ProductModal from '../components/productModal';
+import ProductModal from './productModal';
 
 export default {
   name: 'slide',
@@ -44,7 +45,6 @@ export default {
       swiperOption: {
         slidesPerView: 2,
         spaceBetween: 14,
-        // loop: true,
         autoplay: {
           delay: 5000,
           disableOnInteraction: false,
@@ -60,10 +60,7 @@ export default {
           },
         },
       },
-      products: [],
-      temproduct: {},
-      cart: {},
-      loadingtoCart: '',
+      theslideproducts: [],
     };
   },
   components: {
@@ -72,55 +69,31 @@ export default {
     ProductModal,
   },
   methods: {
-    getProducts() {
-      const vm = this;
-      let array = [];
-      const api2 = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/products/all`;
-      vm.getCart();
-      this.$http.get(api2).then((response) => {
-        array = response.data.products;
-
-        array.forEach((item, i) => {
-          if (i < 8) {
-            const randomNum = Math.floor(Math.random() * array.length);
-            vm.products.push(array.splice(randomNum, 1)[0]);
-          }
-        });
-      });
-    },
     getCurrentProduct(id) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/product/${id}`;
-      const vm = this;
-      this.$http.get(api).then((response) => {
+      this.$store.dispatch('ProductModule/getCurrentProduct', id).then(() => {
         $('#productModal').modal('show');
-        vm.temproduct = response.data.product;
       });
     },
     ToProductsDetaill(id) {
       this.$router.push(`/ProductsDetails/${id}`);
     },
-    getCart() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
-      const vm = this;
-      this.$http.get(api).then((response) => {
-        vm.cart = response.data.data;
-      });
-    },
-    addtoCart(id, qty = 1) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
-      const vm = this;
-      vm.loadingtoCart = id;
-      this.$http.post(api).then(() => {
-        $('#productModal').modal('hide');
-        vm.loadingtoCart = '';
-      });
-      setTimeout(() => {
-        this.$emit('sildeAddtoCart', id, qty);
-      }, 500);
-    },
   },
-  mounted() {
-    this.getProducts();
+  computed: {
+    ...mapGetters('ProductModule', ['slideproducts', 'temproduct']),
+    ...mapGetters('CartModule', ['cartItem']),
+  },
+  created() {
+    this.$store.dispatch('ProductModule/getSlideProducts').then(() => {
+      const vm = this;
+      const array = [...vm.slideproducts];
+
+      array.forEach((item, i) => {
+        if (i < 8) {
+          const randomNum = Math.floor(Math.random() * array.length);
+          vm.theslideproducts.push(array.splice(randomNum, 1)[0]);
+        }
+      });
+    });
   },
 };
 </script>

@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     getPages(page) {
-      this.$emit('thePage', page);
+      this.$store.dispatch('ProductModule/getProducts', page);
       this.$emit('scrollTarget');
     },
   },

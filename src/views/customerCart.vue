@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loading :active.sync="isLoading">
+    <loading :active.sync="isLoading" style="z-index:1080 !important;">
       <template slot="default">
         <img src="../assets/002.gif">
       </template>
@@ -11,7 +11,7 @@
       <h5 class="text-center py-5 mt-3 mb-5 nonecart" v-if="!cart.total">目前您的購物車沒有任何行程!</h5>
       <hr v-if="!cart.total">
       <h3 class="cart-recommend mb-4 pl-2" v-if="!cart.total">為您推薦!</h3>
-      <productSlide @sildeAddtoCart="addtoCart"  v-if="!cart.total"/>
+      <productSlide v-if="!cart.total"/>
 
       <div class="row" v-if="cart.total">
         <div class="col-lg-7">
@@ -101,83 +101,39 @@
 </template>
 
 <script>
-/* global $ */
+import { mapGetters, mapActions } from 'vuex';
 import productSlide from '../components/productSlide';
 
 export default {
   name: 'customerCart',
   data() {
     return {
-      cart: {},
-      cartItem: '',
       cartdisable: '',
       coupon_code: '',
-      isLoading: false,
     };
   },
   methods: {
-    getCart() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
-      const vm = this;
-      this.$http.get(api).then((response) => {
-        vm.cart = response.data.data;
-      });
-    },
-    addtoCart(id, qty = 1) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
-      const vm = this;
-      vm.isLoading = true;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      this.$http.post(api, { data: cart }).then(() => {
-        vm.isLoading = false;
-        $('#productModal').modal('hide');
-        vm.$bus.$emit('message:push', '此行程已加入購物車', 'success');
-        vm.$bus.$emit('pushCart');
-        this.getCart();
-      });
-    },
     deleteCart(id) {
       const vm = this;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart/${id}`;
-      vm.disables = true;
-      vm.cartItem = id;
       vm.cartdisable = id;
-      vm.isLoading = true;
-      this.$http.delete(api).then((response) => {
-        vm.isLoading = false;
-        vm.cartItem = '';
-        if (response.data.success) {
-          vm.getCart();
-          vm.$bus.$emit('message:push', '成功刪除此行程', 'success');
-          vm.$bus.$emit('pushCart');
-        }
-      });
+      this.$store.dispatch('CartModule/deleteCart', id);
     },
     addCouponCode() {
       const vm = this;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/coupon`;
-      const coupon = {
-        code: vm.coupon_code,
-      };
-      vm.isLoading = true;
-      this.$http.post(api, { data: coupon }).then((response) => {
-        vm.isLoading = false;
-        if (response.data.success) {
-          vm.$bus.$emit('message:push', '已套用優惠券', 'success');
-          vm.getCart();
+      if (vm.coupon_code !== '') {
+        this.$store.dispatch('CartModule/addCouponCode', vm.coupon_code).then(() => {
           vm.coupon_code = '';
-        } else {
-          vm.$bus.$emit('message:push', response.data.message, 'danger');
-          vm.coupon_code = '';
-        }
-      });
+        });
+      }
     },
     toCreateOrder() {
       this.$router.push('/CreateOrder');
     },
+    ...mapActions('CartModule', ['getCart']),
+  },
+  computed: {
+    ...mapGetters(['isLoading']),
+    ...mapGetters('CartModule', ['cart', 'cartItem']),
   },
   components: {
     productSlide,

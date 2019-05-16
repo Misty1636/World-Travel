@@ -59,16 +59,11 @@
 
 <script>
 /* global $ */
-import Alert from '../components/AlertMessage';
+import { mapGetters, mapActions } from 'vuex';
+import Alert from './AlertMessage';
 
 export default {
   name: 'Nav',
-  data() {
-    return {
-      cart: {},
-      cartlength: 0,
-    };
-  },
   methods: {
     closeOffcanvas() {
       $('.menu').removeClass('open-offcanvas');
@@ -80,14 +75,6 @@ export default {
     },
     ToCustomerCart() {
       this.$router.push('/customerCart');
-    },
-    getCart() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
-      const vm = this;
-      this.$http.get(api).then((response) => {
-        vm.cart = response.data.data;
-        vm.cartlength = vm.cart.carts.length;
-      });
     },
     toView(name) {
       this.$router.push(`/${name}`);
@@ -104,6 +91,10 @@ export default {
         $('.header').removeClass('header-dark');
       }
     },
+    ...mapActions('CartModule', ['getCart']),
+  },
+  computed: {
+    ...mapGetters('CartModule', ['cart', 'cartlength']),
   },
   components: {
     Alert,
@@ -123,8 +114,7 @@ export default {
         return;
       }
 
-      // eslint-disable-next-line func-names
-      $('.header').each(function () {
+      $('.header').each(function headerclass() {
         const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos) {
           $(this).addClass('header-dark');
@@ -134,16 +124,11 @@ export default {
         }
       });
     });
-
-    this.$bus.$on(('pushCart'), () => {
-      this.getCart();
-    });
   },
   watch: {
     // eslint-disable-next-line object-shorthand
     '$route'() {
       this.getrouter();
-      // console.log(this.$route.path);
     },
   },
 };
@@ -154,4 +139,3 @@ export default {
     background-image: none;
   }
 </style>
-

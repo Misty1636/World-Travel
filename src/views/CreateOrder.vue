@@ -144,12 +144,12 @@
 
 <script>
 /* global $ */
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'CreateOrder',
   data() {
     return {
-      cart: {},
-      isLoading: false,
       form: {
         user: {
           name: '',
@@ -165,34 +165,17 @@ export default {
     };
   },
   methods: {
-    getCart() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
-      const vm = this;
-      this.$http.get(api).then((response) => {
-        vm.cart = response.data.data;
-      });
-    },
-    toCreateOrder() {
-      this.$router.push('/CreateOrder');
-    },
     createOrder() {
       const vm = this;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/order`;
       const order = vm.form;
 
       this.$validator.validate().then((valid) => {
         if (valid) {
-          vm.isLoading = true;
-          this.$http.post(api, { data: order }).then((response) => {
-            vm.isLoading = false;
-            if (response.data.success) {
-              vm.leave = true;
-              vm.$router.replace(`/OrderPayment/${response.data.orderId}`);
-              vm.$bus.$emit('pushCart');
-            }
+          this.$store.dispatch('OrderModule/createOrder', order).then(() => {
+            vm.leave = true;
           });
         } else {
-          vm.$bus.$emit('message:push', '資料不完整!', 'danger');
+          this.$store.dispatch('AlertModule/updateMessage', { message: '資料不完整!', status: 'danger' });
         }
       });
     },
@@ -200,8 +183,12 @@ export default {
       this.$router.go(-1);
     },
   },
+  computed: {
+    ...mapGetters(['isLoading']),
+    ...mapGetters('CartModule', ['cart']),
+  },
   created() {
-    this.getCart();
+    this.$store.dispatch('CartModule/getCart');
   },
   beforeRouteLeave(to, from, next) {
     const vm = this;

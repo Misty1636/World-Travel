@@ -23,11 +23,10 @@ export default {
 
       this.$http.post(api).then((response) => {
         if (response.data.success) {
-          vm.$router.push('/signin');
+          vm.$router.push('/Login');
         }
       });
     },
   },
 };
 </script>
-

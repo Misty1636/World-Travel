@@ -7,25 +7,25 @@
     </loading>
 
     <div class="ProductsDetails pt-7">
-      <div class="container ProductsDetails-box mx-auto">
+      <div class="container ProductsDetails-box mx-auto" v-if="currentPageProduct.title">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent p-0 text-secondary">
             <li class="breadcrumb-item">精選行程</li>
-            <li class="breadcrumb-item">{{currentProduct.category}}</li>
-            <li class="breadcrumb-item">{{currentProduct.title}}</li>
+            <li class="breadcrumb-item">{{currentPageProduct.category}}</li>
+            <li class="breadcrumb-item">{{currentPageProduct.title}}</li>
           </ol>
         </nav>
         <div class="row ProductsDetails-main mb-5">
           <div class="col-xl-7 col-lg-8 ProductsDetails-img mb-lg-0 mb-4">
-            <img class="img-fluid" :src="currentProduct.imageUrl" alt="">
+            <img class="img-fluid" :src="currentPageProduct.imageUrl" alt="">
           </div>
           <div class="col-xl-5 col-lg-4 pt-xl-3">
             <div class="ProductsDetails-content">
-              <h1 class="mb-0 font-weight-bold">{{currentProduct.title}}</h1>
+              <h1 class="mb-0 font-weight-bold">{{currentPageProduct.title}}</h1>
               <hr>
               <div class="d-flex justify-content-between align-items-center mb-4">
-                <span class="text-secondary oldprice">原價 {{currentProduct.origin_price | currency}}</span>
-                <span class="offer">現在報名 {{currentProduct.price | currency}}</span>
+                <span class="text-secondary oldprice">原價 {{currentPageProduct.origin_price | currency}}</span>
+                <span class="offer">現在報名 {{currentPageProduct.price | currency}}</span>
               </div>
               <ul class="list-unstyled remind mb-3">
                 <li>
@@ -43,16 +43,16 @@
               </ul>
               <select name="count" class="form-control mb-3" v-model="counts">
                 <option :value="num" v-for="num in 10" :key="num">
-                  總共 {{num}} {{currentProduct.unit}}
+                  總共 {{num}} {{currentPageProduct.unit}}
                 </option>
               </select>
               <div class="d-flex justify-content-end total-price">
-                <span class="">小計 <strong>{{ counts * currentProduct.price | currency}}</strong></span>
+                <span class="">小計 <strong>{{ counts * currentPageProduct.price | currency}}</strong></span>
               </div>
               <div class="text-right">
-                <button type="button" class="registration-btn"  @click="addtoCart(currentProduct.id, counts)">
+                <button type="button" class="registration-btn"  @click="addtoCart(currentPageProduct.id, counts)">
                   立即報名
-                  <font-awesome-icon icon="spinner" spin  v-if="currentProduct.id === loadingtoCart"/>
+                  <font-awesome-icon icon="spinner" spin  v-if="currentPageProduct.id === cartItem"/>
                 </button>
               </div>
             </div>
@@ -64,12 +64,12 @@
             <span class="bookmark" ><font-awesome-icon icon="bookmark"/></span>
             <h3 class="ml-2 mb-0">特色介紹</h3>
           </div>
-          <p class="mb-5 text-secondary">{{currentProduct.description}}</p>
+          <p class="mb-5 text-secondary">{{currentPageProduct.description}}</p>
           <div class="d-flex align-items-center mb-3">
             <span class="star"><font-awesome-icon icon="star"/></span>
             <h3 class="ml-2 mb-0">注意事項</h3>
           </div>
-          <Attention :attentionItem="currentProduct" />
+          <Attention :attentionItem="currentPageProduct" />
         </div>
 
       </div>
@@ -80,55 +80,37 @@
 
 
 <script>
-/* global $ */
+import { mapGetters } from 'vuex';
 import Attention from '../components/attention';
 
 export default {
   name: 'ProductsDetails',
   data() {
     return {
-      currentProduct: {},
-      currentId: '',
       counts: 1,
-      loadingtoCart: '',
-      isLoading: false,
+      currentPageProduct: {},
     };
   },
   methods: {
-    getCurrentProduct() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/product/${this.currentId}`;
-      const vm = this;
-      this.$http.get(api).then((response) => {
-        vm.currentProduct = response.data.product;
-      });
-    },
     addtoCart(id, qty = 1) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/cart`;
       const vm = this;
-      vm.loadingtoCart = id;
-      vm.isLoading = true;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      this.$http.post(api, { data: cart }).then(() => {
-        vm.isLoading = false;
-        vm.loadingtoCart = '';
-        vm.$bus.$emit('message:push', '此行程已加入購物車', 'success');
-        vm.$bus.$emit('pushCart');
+      this.$store.dispatch('CartModule/addtoCart', { id, qty }).then(() => {
         vm.counts = 1;
       });
     },
+  },
+  computed: {
+    ...mapGetters(['isLoading']),
+    ...mapGetters('ProductModule', ['currentProduct']),
+    ...mapGetters('CartModule', ['cartItem']),
   },
   components: {
     Attention,
   },
   created() {
-    this.currentId = this.$route.params.id;
-    this.getCurrentProduct();
-  },
-  mounted() {
-    $('html,body').animate({ scrollTop: 0 }, 10);
+    this.$store.dispatch('ProductModule/getCurrentPageProduct', this.$route.params.id).then(() => {
+      this.currentPageProduct = Object.assign({}, this.currentProduct);
+    });
   },
 };
 </script>

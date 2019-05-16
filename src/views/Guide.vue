@@ -211,30 +211,25 @@ export default {
     },
   },
   mounted() {
-    $('html,body').animate({ scrollTop: 0 }, 10);
-
     $(window).scroll(() => {
       const scrollPos = $(window).scrollTop();
       const windowHeight = $(window).height();
 
-      // eslint-disable-next-line func-names
-      $('.animated-left').each(function () {
+      $('.animated-left').each(function animatedleft() {
         const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
           $(this).addClass('fade-X');
         }
       });
 
-      // eslint-disable-next-line func-names
-      $('.animated-right').each(function () {
+      $('.animated-right').each(function animatedright() {
         const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
           $(this).addClass('fade-X');
         }
       });
 
-      // eslint-disable-next-line func-names
-      $('.animated-bottom').each(function () {
+      $('.animated-bottom').each(function animatedbottom() {
         const thisPos = $(this).offset().top;
         if (windowHeight + scrollPos >= thisPos + 200) {
           $(this).addClass('bottom-In');

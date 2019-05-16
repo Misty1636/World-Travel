@@ -21,12 +21,16 @@
     <div class="px-3 py-sm-5 py-4 OrderComplete-data mb-sm-8 mb-6">
       <h4 class="text-center mb-4">感謝您的訂購，歡迎您再次光臨!</h4>
       <div class="mx-auto yourOrder mb-1">
+        <span class="mr-2">訂單完成時間:</span>
+        <span class="info" v-if="order.id">{{order.paid_date | getTime}}</span>
+      </div>
+      <div class="mx-auto yourOrder mb-1">
         <span class="mr-2">您的訂單編號:</span>
-        <span class="info">{{orderId}}</span>
+        <span class="info" v-if="order.id">{{order.id}}</span>
       </div>
       <div class="mx-auto yourOrder mb-5">
         <span class="mr-2">您的訂單金額:</span>
-        <span class="info">{{ order.total | currency }}</span>
+        <span class="info" v-if="order.id">{{ order.total | currency }}</span>
       </div>
       <p class="mb-1 text-center text-secondary">您的訂單將會在3個工作天內處理完成。</p>
       <p class="mb-1 text-center text-secondary">如遇國定連假、寒暑假旺季則在5個工作天內處理完成。</p>
@@ -39,33 +43,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'OrderComplete',
-  data() {
-    return {
-      order: {
-        user: {
-
-        },
-      },
-      orderId: '',
-    };
-  },
   methods: {
-    getOrder() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_CUS}/order/${vm.orderId}`;
-      this.$http.get(api).then((response) => {
-        vm.order = response.data.order;
-      });
-    },
     toProducts() {
       this.$router.push('/Products');
     },
   },
+  computed: {
+    ...mapGetters('OrderModule', ['order']),
+  },
   created() {
-    this.orderId = this.$route.params.orderId;
-    this.getOrder();
+    this.$store.dispatch('OrderModule/getOrder', this.$route.params.orderId);
   },
 };
 </script>

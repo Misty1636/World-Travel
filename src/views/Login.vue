@@ -22,7 +22,7 @@
               <input type="password" class="form-control" id="Password" placeholder="Password" v-model="user.password" required>
             </div>
             <div class="custom-control custom-checkbox mb-4">
-              <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <input type="checkbox" class="custom-control-input" id="customCheck1" v-model="checkbox">
               <label class="custom-control-label" for="customCheck1">記住我</label>
             </div>
             <button type="submit" class="btn btn-primary btn-block mb-4">登入</button>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Alert from '../components/AlertMessage';
 
 export default {
@@ -72,26 +73,21 @@ export default {
         username: '',
         password: '',
       },
-      isLoading: false,
+      checkbox: false,
     };
   },
   methods: {
     signin() {
-      const api = `${process.env.VUE_APP_API}/admin/signin`;
       const vm = this;
-      vm.isLoading = true;
-      this.$http.post(api, vm.user).then((response) => {
-        vm.isLoading = false;
-        if (response.data.success) {
-          vm.$router.push('/admin/buildProducts');
-          vm.$bus.$emit('message:push', '登入成功', 'success');
-        } else {
-          vm.user.username = '';
-          vm.user.password = '';
-          vm.$bus.$emit('message:push', '帳號或密碼有誤', 'danger');
-        }
+      this.$store.dispatch('BackstageModule/signin', vm.user).then(() => {
+        vm.user.username = '';
+        vm.user.password = '';
+        vm.checkbox = false;
       });
     },
+  },
+  computed: {
+    ...mapGetters(['isLoading']),
   },
   components: {
     Alert,
