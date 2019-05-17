@@ -17,3 +17,8 @@ https://misty1636.github.io/World-Travel/
 + ESlint(Airbnb)提升程式碼品質
 ## 使用的Plugin
 + [Vue-axios](https://www.npmjs.com/package/vue-axios)
++ [Vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
++ [Vue-loading-overlay](https://github.com/ankurk91/vue-loading-overlay)
++ [Vee-validate](https://baianat.github.io/vee-validate/)
++ [Vue-fontawesome](https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs)
++ [Vue-videobg](https://github.com/pespantelis/vue-videobg)
