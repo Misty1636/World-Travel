@@ -8,6 +8,9 @@ import VueAxios from 'vue-axios';
 // bootstrap
 import 'bootstrap';
 
+// v-charts
+import VCharts from 'v-charts';
+
 // Loading套件
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -40,6 +43,7 @@ import timetampsFilter from './filters/timetamps';
 import giveclass from './filters/giveclass';
 
 Vue.component('video-bg', VideoBg);
+Vue.use(VCharts);
 
 VeeValidate.Validator.localize('zhTW', zhTW);
 Vue.use(VeeValidate, {
