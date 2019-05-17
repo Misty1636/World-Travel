@@ -25,6 +25,7 @@ https://misty1636.github.io/World-Travel/
 # 前台介紹
 ## loading動畫
 大部分頁面使用
+
 ![loading](https://user-images.githubusercontent.com/47848363/57913243-bfe3af80-78be-11e9-8022-5461d53d72a4.gif)
 ## 首頁
 ![index1](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
