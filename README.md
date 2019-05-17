@@ -57,7 +57,7 @@ https://misty1636.github.io/World-Travel/
 ![OrderPayment](https://user-images.githubusercontent.com/47848363/57916409-5ca94b80-78c5-11e9-89c6-37d92a4f5c3b.png)
 ## 結帳完成
 ![OrderComplete](https://user-images.githubusercontent.com/47848363/57916410-5d41e200-78c5-11e9-9dc0-17dd44ec369c.png)
-# 後台
+# 後台介紹
 ## 登入
 ![Login](https://user-images.githubusercontent.com/47848363/57916412-5d41e200-78c5-11e9-9547-d96b3bd09e83.png)
 ## 商品管理
