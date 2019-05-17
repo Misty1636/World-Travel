@@ -16,8 +16,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'swiper/dist/css/swiper.css';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
 
 export default {
@@ -73,27 +71,14 @@ export default {
 };
 </script>
 
-<style lang="scss" scpoed>
+<style lang="scss" scoped>
   .swiper-container {
     height: 350px;
     @media (min-width: 576px){
       height: 450px;
-      @media (min-width: 768px){
-        height: 600px;
-      }
     }
-  }
-
-  .swiper-box{
-    transform: translateX(40px);
-    @media (min-width: 576px){
-      transform: translateX(30px);
-      @media (min-width: 768px){
-        transform: translateX(20px);
-        @media (min-width: 992x){
-          transform: translateX(0);
-        }
-      }
+    @media (min-width: 768px){
+      height: 600px;
     }
   }
 
@@ -102,9 +87,17 @@ export default {
     background:rgba(#444444,.5);
     color: #f2f2f2;
     padding: 16px 22.25px;
+    transform: translateX(40px);
+    @media (min-width: 576px){
+      transform: translateX(30px);
+    }
     @media (min-width: 768px){
-        padding: 20px 24px;
-      }
+      padding: 20px 24px;
+      transform: translateX(20px);
+    }
+    @media (min-width: 992px){
+      transform: translateX(0);
+    }
     h2{
       font-size: 25px;
       font-weight: 300;

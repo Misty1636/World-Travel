@@ -1,36 +1,38 @@
 <template>
-  <div>
+  <div class="buildProducts">
      <loading :active.sync="isLoading">
         <template slot="default">
           <img src="../../assets/003.gif"   >
         </template>
      </loading>
     <div class="text-right mt-4">
-      <button class="btn btn-primary" @click="openModal(true)">建立新的產品</button>
+      <button class="btn btn-primary" @click="openModal(true)">建立新的行程</button>
     </div>
-    <table class="table mt-4 table-responsive-lg">
+    <table class="table mt-5 mb-6 table-responsive-lg">
       <thead>
-        <th width="120">分類</th>
-        <th class="text-nowrap">產品名稱</th>
+        <th width="120">區域</th>
+        <th class="text-nowrap">行程名稱</th>
         <th width="120">原價</th>
         <th width="120">售價</th>
-        <th class="text-nowrap" width="100">是否啟用</th>
+        <th class="text-nowrap" width="100">是否上架</th>
         <th width="150">編輯</th>
       </thead>
       <tbody>
         <tr v-for="item in products" :key="item.id">
-          <td class="text-nowrap">{{item.category}}</td>
-          <td class="text-nowrap">{{item.title}}</td>
-          <td class="text-right text-nowrap">{{item.origin_price | currency}}</td>
-          <td class="text-right text-nowrap">{{item.price | currency}}</td>
-          <td class="text-center text-nowrap">
-            <span v-if="item.is_enabled==1" class="text-success">啟用</span>
-            <span v-else class="text-danger">未啟用</span>
+          <td class="text-nowrap align-middle category">
+            <span class="badge" :class="item.category | giveclass">{{item.category}}</span>
+          </td>
+          <td class="text-nowrap align-middle">{{item.title}}</td>
+          <td class="text-right text-nowrap align-middle">{{item.origin_price | currency}}</td>
+          <td class="text-right text-nowrap align-middle">{{item.price | currency}}</td>
+          <td class="text-center text-nowrap align-middle">
+            <span v-if="item.is_enabled==1" class="text-success">已上架</span>
+            <span v-else class="text-danger">未上架</span>
           </td>
           <td class="text-nowrap">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button class="btn btn-outline-primary btn-sm"  @click="openModal(false,item)">編輯</button>
-              <button class="btn btn-outline-danger btn-sm"  @click="delopenModal(item)">刪除</button>
+              <button class="btn btn-outline-primary btn-sm"  @click="delopenModal(item)">刪除</button>
             </div>
           </td>
         </tr>
@@ -76,7 +78,6 @@ export default {
       const vm = this;
       vm.isLoading = true;
       this.$http.get(api).then((response) => {
-        // console.log(response.data.products);
         vm.isLoading = false;
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
@@ -126,7 +127,6 @@ export default {
       });
     },
     uploadFile() {
-      // console.log(this);
       const uploadedFile = this.$refs.files.$refs.files.files[0]; // 用元件插入的寫法  files為ref的自訂屬性名稱
       // const uploadedFile = this.$refs.files.files[0]  沒用元件的寫法
       const vm = this;
@@ -140,7 +140,6 @@ export default {
         },
       }).then((response) => {
         vm.status.uploadloading = false;
-        // console.log(response.data);
         if (response.data.success) {
           vm.$set(vm.temProducts, 'imageUrl', response.data.imageUrl);
         } else {

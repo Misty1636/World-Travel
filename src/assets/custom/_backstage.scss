@@ -1,0 +1,30 @@
+.backstage {
+  font-size: .875rem;
+  min-height: 100vh;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+.buildProducts{
+  .badge-light{
+    background: $Pure-orange;
+    color: $white;
+  }
+  .badge-primary{
+    background: $Bright-blue;
+  }
+  .badge-secondary{
+    background: $Moderate-green;
+  }
+  .badge-warning{
+    background: $Bright-orange;
+    color: $white;
+  }
+  .badge-danger{
+    background: $Bright-red;
+  }
+}

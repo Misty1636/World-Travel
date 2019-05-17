@@ -37,6 +37,7 @@ import store from './store';
 import './bus';
 import currencyFilter from './filters/currency';
 import timetampsFilter from './filters/timetamps';
+import giveclass from './filters/giveclass';
 
 Vue.component('video-bg', VideoBg);
 
@@ -55,6 +56,7 @@ Vue.config.productionTip = false;
 Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
 Vue.filter('getTime', timetampsFilter);
+Vue.filter('giveclass', giveclass);
 
 axios.defaults.withCredentials = true;
 // window.$ = $;

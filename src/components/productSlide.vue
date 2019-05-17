@@ -33,8 +33,6 @@
 <script>
 /* global $ */
 import { mapGetters } from 'vuex';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'swiper/dist/css/swiper.css';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
 import ProductModal from './productModal';
 
@@ -98,23 +96,23 @@ export default {
 };
 </script>
 
-<style lang="scss" scpoed>
+<style lang="scss" scoped>
   .swiper-container {
     height: 430px;
-      @media (min-width: 440px){
-        height: 470px;
-        @media (min-width: 500px){
-        height: 500px;
-        @media (min-width: 768px){
-          height: 420px;
-          @media (min-width: 992px){
-            height: 500px;
-            @media (min-width: 1140px){
-              height: 530px;
-            }
-          }
-        }
-      }
+    @media (min-width: 440px){
+      height: 470px;
+    }
+    @media (min-width: 500px){
+      height: 500px;
+    }
+    @media (min-width: 768px){
+      height: 420px;
+    }
+    @media (min-width: 992px){
+      height: 500px;
+    }
+    @media (min-width: 1140px){
+      height: 530px;
     }
   }
 </style>

@@ -8,7 +8,7 @@
     <div class="text-right mt-4">
       <button class="btn btn-primary" @click="openModal(true)">建立新的優惠券</button>
     </div>
-    <table class="table mt-4 table-responsive-lg">
+    <table class="table mt-5 mb-6 table-responsive-lg">
       <thead>
         <th>名稱</th>
         <th class="text-nowrap">折扣百分比</th>
@@ -31,7 +31,7 @@
           <td class="text-nowrap">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button class="btn btn-outline-primary btn-sm"  @click="openModal(false,item)">編輯</button>
-              <button class="btn btn-outline-danger btn-sm"  @click="delopenModal(item)">刪除</button>
+              <button class="btn btn-outline-primary btn-sm"  @click="delopenModal(item)">刪除</button>
             </div>
           </td>
         </tr>

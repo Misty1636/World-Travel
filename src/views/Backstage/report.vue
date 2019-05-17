@@ -57,11 +57,7 @@ export default {
       const vm = this;
 
       this.$http.get(api).then((response) => {
-        const len = response.data.orders.length;
-        // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < len; i++) {
-          vm.allOrder.push(response.data.orders[i]);
-        }
+        vm.allOrder.push(...response.data.orders);
       });
     },
     getAllOrder() {
@@ -70,7 +66,6 @@ export default {
 
       this.$http.get(api).then((response) => {
         const pages = response.data.pagination.total_pages;
-
         // eslint-disable-next-line no-plusplus
         for (let i = 1; i < pages + 1; i++) {
           vm.getProducts(i);

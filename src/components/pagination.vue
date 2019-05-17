@@ -32,6 +32,7 @@ export default {
     getPages(page) {
       this.$store.dispatch('ProductModule/getProducts', page);
       this.$emit('scrollTarget');
+      this.$emit('thePage', page); // 後台用
     },
   },
 };

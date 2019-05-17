@@ -1,7 +1,9 @@
 @import '~bootstrap/scss/functions';
 @import './helpers/variables';
 @import '~bootstrap/scss/bootstrap';
-@import './helpers/dashboard';
+@import './helpers/swiper';
+
+// custom
 @import './custom//color';
 @import './custom/common';
 @import './custom/animate';
@@ -9,7 +11,6 @@
 @import './custom/login';
 @import './custom/nav';
 @import './custom/footer';
-
 @import './custom/home';
 @import './custom/products';
 @import './custom/productsDetails';
@@ -18,4 +19,6 @@
 @import './custom/orderPayment';
 @import './custom/orderComplete';
 @import './custom/guide';
+
+@import './custom/backstage';
 

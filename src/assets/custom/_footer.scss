@@ -1,8 +1,5 @@
 .footer-bg {
   background: $dark-gray;
-  @include media-breakpoint-down(sm) {
-    margin-top: 20px;
-  }
   a {
     display: block;
     color: $white;
