@@ -1,5 +1,5 @@
 # World Travel (Vue Cli 3)
-![](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
+![index0](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
 ## Demo  
 https://misty1636.github.io/World-Travel/
 ## 簡介
@@ -27,3 +27,6 @@ https://misty1636.github.io/World-Travel/
 大部分頁面使用
 
 ![loading](https://user-images.githubusercontent.com/47848363/57913243-bfe3af80-78be-11e9-8022-5461d53d72a4.gif)
+##首頁
+![index1](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
+![index2](https://user-images.githubusercontent.com/47848363/57916114-c6752580-78c4-11e9-951a-9a34bbd7a044.png)
