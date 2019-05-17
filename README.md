@@ -60,8 +60,6 @@ https://misty1636.github.io/World-Travel/
 ![Login](https://user-images.githubusercontent.com/47848363/57916412-5d41e200-78c5-11e9-9547-d96b3bd09e83.png)
 ## 商品管理
 ![buildProducts](https://user-images.githubusercontent.com/47848363/57923460-f62c2980-78d4-11e9-8e2f-9b38ab4025c4.png)
-## 優惠券管理
-![coupons](https://user-images.githubusercontent.com/47848363/57923461-f6c4c000-78d4-11e9-88fd-6d7225742520.png)
 # 聲明
 + 圖片和資料來源皆來自Google
 + 本作品內的圖片和文字內容，為個人技術練習使用，不做任何商業用途
