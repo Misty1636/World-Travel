@@ -62,4 +62,4 @@ https://misty1636.github.io/World-Travel/
 ![buildProducts](https://user-images.githubusercontent.com/47848363/57923779-d2b5ae80-78d5-11e9-83e8-f4d82e2b8d14.png)
 # 聲明
 + 圖片和資料來源皆來自Google
-+ 本作品內的圖片和文字內容，為個人技術練習使用，不做任何商業用途
++ 本作品內的圖片和文字內容，皆為個人技術練習使用，不做任何商業用途
