@@ -22,6 +22,7 @@ https://misty1636.github.io/World-Travel/
 + [Vee-validate](https://baianat.github.io/vee-validate/)
 + [Vue-fontawesome](https://fontawesome.com/how-to-use/on-the-web/using-with/vuejs)
 + [Vue-videobg](https://github.com/pespantelis/vue-videobg)
++ [V-charts](https://v-charts.js.org/#/)
 # 前台介紹
 ## loading動畫
 + 大部分頁面使用
