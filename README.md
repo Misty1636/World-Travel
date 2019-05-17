@@ -34,6 +34,7 @@ https://misty1636.github.io/World-Travel/
 ![Guide](https://user-images.githubusercontent.com/47848363/57916717-0983c880-78c6-11e9-9ac2-d7851782b7a8.png)
 ## 商品列表
 + 點擊區域自動挑選對應區域，再次點擊當前已選擇區域，則會回到顯示所有
++ 鼠標滑入，會出現2個按鈕選項
 ![Products](https://user-images.githubusercontent.com/47848363/57916402-5c10b500-78c5-11e9-9b14-14c7e80d87db.png)
 ## 商品各別介紹
 ![ProductsDetails](https://user-images.githubusercontent.com/47848363/57916403-5c10b500-78c5-11e9-8be2-f28ec8129d96.png)
@@ -41,3 +42,17 @@ https://misty1636.github.io/World-Travel/
 ![customerCart1](https://user-images.githubusercontent.com/47848363/57916406-5c10b500-78c5-11e9-82b4-12d6b3255fd6.png)
 + 如果購物車為空，自動隨機生成8個推薦商品
 ![customerCart2](https://user-images.githubusercontent.com/47848363/57916405-5c10b500-78c5-11e9-8840-c90b8990f548.png)
+## 訂單
+![CreateOrder1](https://user-images.githubusercontent.com/47848363/57916407-5ca94b80-78c5-11e9-83b8-29d9cb82ad30.png)
++ 如果點擊上一頁或上一步，導航守衛會做判斷，跳出防手殘確認
+![CreateOrder2](https://user-images.githubusercontent.com/47848363/57916408-5ca94b80-78c5-11e9-9624-5b58ce54c274.png)
+## 付款頁面
+![OrderPayment](https://user-images.githubusercontent.com/47848363/57916409-5ca94b80-78c5-11e9-89c6-37d92a4f5c3b.png)
+## 結帳完成
+![OrderComplete](https://user-images.githubusercontent.com/47848363/57916410-5d41e200-78c5-11e9-9dc0-17dd44ec369c.png)
+# 後台
+## 登入
+![Login](https://user-images.githubusercontent.com/47848363/57916412-5d41e200-78c5-11e9-9547-d96b3bd09e83.png)
+# 聲明
++ 圖片和資料來源皆來自Google
++ 本作品內的圖片和文字內容，為個人技術練習使用，不做任何商業用途
