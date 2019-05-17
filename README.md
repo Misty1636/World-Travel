@@ -31,7 +31,8 @@ https://misty1636.github.io/World-Travel/
 ![Home1](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
 ![Home2](https://user-images.githubusercontent.com/47848363/57916114-c6752580-78c4-11e9-951a-9a34bbd7a044.png)
 ## 精彩介紹
-![Guide](https://user-images.githubusercontent.com/47848363/57916717-0983c880-78c6-11e9-9ac2-d7851782b7a8.png)
+![Guide1](https://user-images.githubusercontent.com/47848363/57918594-ab58e480-78c9-11e9-8df3-2828c7c2b9ea.png)
+![Guide2](https://user-images.githubusercontent.com/47848363/57916717-0983c880-78c6-11e9-9ac2-d7851782b7a8.png)
 ## 商品列表
 + 點擊區域自動挑選對應區域，再次點擊當前已選擇區域，則會回到顯示所有
 + 鼠標滑入，會出現2個按鈕選項
