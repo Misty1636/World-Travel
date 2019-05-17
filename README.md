@@ -30,3 +30,10 @@ https://misty1636.github.io/World-Travel/
 ## 首頁
 ![index1](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
 ![index2](https://user-images.githubusercontent.com/47848363/57916114-c6752580-78c4-11e9-951a-9a34bbd7a044.png)
+## 精彩介紹
+![Guide](https://user-images.githubusercontent.com/47848363/57916717-0983c880-78c6-11e9-9ac2-d7851782b7a8.png)
+## 商品列表
+點擊區域自動挑選對應區域，再次點擊當前已選擇區域，則會回到顯示所有
+![Products](https://user-images.githubusercontent.com/47848363/57916402-5c10b500-78c5-11e9-9b14-14c7e80d87db.png)
+## 商品各別介紹
+![ProductsDetails](https://user-images.githubusercontent.com/47848363/57916402-5c10b500-78c5-11e9-9b14-14c7e80d87db.png)
