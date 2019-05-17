@@ -47,7 +47,7 @@ https://misty1636.github.io/World-Travel/
 ![customerCart1](https://user-images.githubusercontent.com/47848363/57916406-5c10b500-78c5-11e9-82b4-12d6b3255fd6.png)
 + 如果購物車為空，自動隨機生成8個推薦商品
 ![customerCart2](https://user-images.githubusercontent.com/47848363/57916405-5c10b500-78c5-11e9-8840-c90b8990f548.png)
-## 訂單
+## 訂單資料
 ![CreateOrder1](https://user-images.githubusercontent.com/47848363/57916407-5ca94b80-78c5-11e9-83b8-29d9cb82ad30.png)
 + 如果點擊上一頁或上一步，導航守衛會做判斷，跳出防手殘確認
 ![CreateOrder2](https://user-images.githubusercontent.com/47848363/57916408-5ca94b80-78c5-11e9-9624-5b58ce54c274.png)
