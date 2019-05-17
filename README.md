@@ -52,6 +52,7 @@ https://misty1636.github.io/World-Travel/
 + 如果點擊上一頁或上一步，導航守衛會做判斷，跳出防手殘確認
 ![CreateOrder2](https://user-images.githubusercontent.com/47848363/57916408-5ca94b80-78c5-11e9-9624-5b58ce54c274.png)
 ## 付款頁面
++ 訂單成立後，右上角購物車即清空
 ![OrderPayment](https://user-images.githubusercontent.com/47848363/57916409-5ca94b80-78c5-11e9-89c6-37d92a4f5c3b.png)
 ## 結帳完成
 ![OrderComplete](https://user-images.githubusercontent.com/47848363/57916410-5d41e200-78c5-11e9-9dc0-17dd44ec369c.png)
