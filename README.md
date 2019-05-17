@@ -1,5 +1,5 @@
 # World Travel (Vue Cli 3)
-![index0](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
+![index](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
 ## Demo  
 https://misty1636.github.io/World-Travel/
 ## 簡介
@@ -28,12 +28,16 @@ https://misty1636.github.io/World-Travel/
 
 ![loading](https://user-images.githubusercontent.com/47848363/57913243-bfe3af80-78be-11e9-8022-5461d53d72a4.gif)
 ## 首頁
-![index1](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
-![index2](https://user-images.githubusercontent.com/47848363/57916114-c6752580-78c4-11e9-951a-9a34bbd7a044.png)
+![Home1](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
+![Home2](https://user-images.githubusercontent.com/47848363/57916114-c6752580-78c4-11e9-951a-9a34bbd7a044.png)
 ## 精彩介紹
 ![Guide](https://user-images.githubusercontent.com/47848363/57916717-0983c880-78c6-11e9-9ac2-d7851782b7a8.png)
 ## 商品列表
 點擊區域自動挑選對應區域，再次點擊當前已選擇區域，則會回到顯示所有
 ![Products](https://user-images.githubusercontent.com/47848363/57916402-5c10b500-78c5-11e9-9b14-14c7e80d87db.png)
 ## 商品各別介紹
-![ProductsDetails](https://user-images.githubusercontent.com/47848363/57916402-5c10b500-78c5-11e9-9b14-14c7e80d87db.png)
+![ProductsDetails](https://user-images.githubusercontent.com/47848363/57916403-5c10b500-78c5-11e9-8be2-f28ec8129d96.png)
+## 購物車
+![customerCart1](https://user-images.githubusercontent.com/47848363/57916406-5c10b500-78c5-11e9-82b4-12d6b3255fd6.png)
+如果購物車為空，自動隨機生成8個推薦商品
+![customerCart2](https://user-images.githubusercontent.com/47848363/57916405-5c10b500-78c5-11e9-8840-c90b8990f548.png)
