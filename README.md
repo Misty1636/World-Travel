@@ -45,6 +45,7 @@ https://misty1636.github.io/World-Travel/
 
 ![smallCart](https://user-images.githubusercontent.com/47848363/57918783-07bc0400-78ca-11e9-859a-4d5df9b40d15.png)
 + 購物車頁面
++ 優惠碼 989898(已過期) or 9595 or 858585
 ![customerCart1](https://user-images.githubusercontent.com/47848363/57916406-5c10b500-78c5-11e9-82b4-12d6b3255fd6.png)
 + 如果購物車為空，自動隨機生成8個推薦商品
 ![customerCart2](https://user-images.githubusercontent.com/47848363/57916405-5c10b500-78c5-11e9-8840-c90b8990f548.png)
