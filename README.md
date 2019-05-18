@@ -13,7 +13,7 @@ https://misty1636.github.io/World-Travel/
 + Webpack
 + RWD(支援到iphone5 320px)
 + Bootstrap 4 + 大量手刻SCSS
-+ Ajax串接API
++ Ajax串接API、ES6
 + ESlint(Airbnb)提升程式碼品質
 ## 使用的Plugin
 + [Vue-axios](https://www.npmjs.com/package/vue-axios)
