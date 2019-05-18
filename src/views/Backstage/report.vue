@@ -1,5 +1,5 @@
 <template>
-  <div class="container pt-3">
+  <div class="pt-3">
     <h1 class="text-center text-primary h2">報表</h1>
     <hr class="my-5">
     <div class="row">
@@ -38,16 +38,14 @@ export default {
     return {
       order: {},
       pagination: {},
-      isLoading: false,
       allOrder: [],
-      money: 0,
       chartData1: { // 先暫時寫死
         columns: ['區域', '行程數量'],
         rows: [
           { 區域: '歐洲', 行程數量: 20 },
-          { 區域: '亞洲', 行程數量: 14 },
+          { 區域: '亞洲', 行程數量: 16 },
           { 區域: '非洲', 行程數量: 4 },
-          { 區域: '大洋洲', 行程數量: 4 },
+          { 區域: '大洋洲', 行程數量: 5 },
           { 區域: '美洲', 行程數量: 11 },
         ],
       },
@@ -89,7 +87,6 @@ export default {
 
       this.$http.get(api).then((response) => {
         vm.allOrder.push(...response.data.orders);
-        // console.log(vm.allOrder);
         this.ordernum();
         this.ordertotal();
         this.largeAmount();
@@ -174,21 +171,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.report-content{
-  border: 1px solid #9f8d79;
-  box-shadow: 0 0 15px #CCC;
-}
-
-.report-item{
-  .report-name,.report-num{
-    display: inline-block;
-    width: 125px;
-  }
-  hr{
-    width: 250px;
-    background: rgba(#9f8d79,.7);
-  }
-}
-</style>

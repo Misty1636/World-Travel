@@ -22,6 +22,17 @@ export default {
         });
       });
     },
+    logout(context) {
+      const api = `${process.env.VUE_APP_API}/logout`;
+
+      axios.post(api).then((response) => {
+        if (response.data.success) {
+          router.push('/Login');
+        } else {
+          context.dispatch('AlertModule/updateMessage', { message: '出現異常，請稍後再試', status: 'danger' }, { root: true });
+        }
+      });
+    },
   },
   mutations: {},
   getters: {},
