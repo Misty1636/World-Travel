@@ -66,5 +66,5 @@ https://misty1636.github.io/World-Travel/
 ## 訂單統計
 ![report](https://user-images.githubusercontent.com/47848363/57942924-46bb7b00-7905-11e9-9b58-fb5a41a8bf48.png)
 # 聲明
-+ 圖片和資料來源皆來自Google
++ 圖片和資料來源皆來自於Google
 + 本作品內的圖片和文字內容，皆為個人技術練習使用，不做任何商業用途
