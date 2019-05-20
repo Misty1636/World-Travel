@@ -1,6 +1,6 @@
 # World Travel (Vue Cli 3)
 ![index](https://user-images.githubusercontent.com/47848363/57911507-8ad55e00-78ba-11e9-8971-9b47afcb7d71.png)
-## Demo  
+## Demo
 https://misty1636.github.io/World-Travel/
 ## 簡介
 此作品的功能有:
