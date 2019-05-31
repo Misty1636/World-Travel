@@ -11,7 +11,7 @@ https://misty1636.github.io/World-Travel/
 + VueRouter
 + Vuex管理
 + Webpack
-+ RWD(支援到iphone5 320px)
++ RWD(支援到iphone5)
 + Bootstrap 4 + 搭配手刻SCSS
 + Ajax串接API、ES6
 + ESlint(Airbnb)提升程式碼品質
